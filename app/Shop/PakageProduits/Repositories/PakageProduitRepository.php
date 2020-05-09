@@ -23,16 +23,17 @@ class PakageProduitRepository extends BaseRepository implements PakageProduitRep
     }
 
     /**
-     * List all the PakageProduits
+     * List all the PakageProduit
      *
      * @param string $order
      * @param string $sort
      * @param array $except
      * @return \Illuminate\Support\Collection
      */
-    public function listPakageProduits(string $order = 'id', string $sort = 'desc', $except = []) : Collection
+    public function listPakageProduits(string $order = 'id', string $sort = 'desc', $except = [],array $columns = ['*']) : Collection
     {
         return $this->model->orderBy($order, $sort)->get()->except($except);
+        //return $this->all($columns, $order, $sort);
     }
 
     /**
@@ -88,5 +89,10 @@ class PakageProduitRepository extends BaseRepository implements PakageProduitRep
     public function deletePakageProduit() : bool
     {
         return $this->model->delete();
+    }
+
+    public function searchPakageProduct(string $text): Collection
+    {
+        // TODO: Implement searchPakageProduct() method.
     }
 }

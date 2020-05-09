@@ -35,6 +35,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
                 Route::resource('customers', 'CustomerController');
                 Route::resource('customers.addresses', 'CustomerAddressController');
             });
+            Route::namespace('PakageProduits')->group(function () {
+                Route::resource('packs', 'PakageProduitController');
+            });
             Route::namespace('Categories')->group(function () {
                 Route::resource('categories', 'CategoryController');
                 Route::get('remove-image-category', 'CategoryController@removeImage')->name('category.remove.image');

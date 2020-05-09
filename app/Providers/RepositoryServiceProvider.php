@@ -24,10 +24,14 @@ use App\Shop\Customers\Repositories\CustomerRepository;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
 use App\Shop\Employees\Repositories\EmployeeRepository;
 use App\Shop\Employees\Repositories\Interfaces\EmployeeRepositoryInterface;
+use App\Shop\LinePakageProduits\Repositories\Interfaces\LinePakageProduitRepositoryInterface;
+use App\Shop\LinePakageProduits\Repositories\LinePakageProduitRepository;
 use App\Shop\Orders\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Shop\Orders\Repositories\OrderRepository;
 use App\Shop\OrderStatuses\Repositories\Interfaces\OrderStatusRepositoryInterface;
 use App\Shop\OrderStatuses\Repositories\OrderStatusRepository;
+use App\Shop\PakageProduits\Repositories\Interfaces\PakageProduitRepositoryInterface;
+use App\Shop\PakageProduits\Repositories\PakageProduitRepository;
 use App\Shop\Permissions\Repositories\PermissionRepository;
 use App\Shop\Permissions\Repositories\Interfaces\PermissionRepositoryInterface;
 use App\Shop\ProductAttributes\Repositories\ProductAttributeRepository;
@@ -146,6 +150,14 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             PermissionRepositoryInterface::class,
             PermissionRepository::class
+        );
+        $this->app->bind(
+            PakageProduitRepositoryInterface::class,
+            PakageProduitRepository::class
+        );
+        $this->app->bind(
+            LinePakageProduitRepositoryInterface::class,
+            LinePakageProduitRepository::class
         );
     }
 }

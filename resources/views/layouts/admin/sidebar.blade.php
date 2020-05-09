@@ -31,16 +31,28 @@
                     @if($user->hasPermission('create-product'))<li><a href="{{ route('admin.products.create') }}"><i class="fa fa-plus"></i> Create product</a></li>@endif
                     <li class="@if(request()->segment(2) == 'attributes') active @endif">
                     <a href="#">
-                        <i class="fa fa-gear"></i> <span>Attributes</span>
+                        <i class="fa fa-gear"></i> <span>Pack Product</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ route('admin.attributes.index') }}"><i class="fa fa-circle-o"></i> List attributes</a></li>
-                        <li><a href="{{ route('admin.attributes.create') }}"><i class="fa fa-plus"></i> Create attribute</a></li>
+                        <li><a href="{{ route('admin.packs.index') }}"><i class="fa fa-circle-o"></i> List pack</a></li>
+                        <li><a href="{{ route('admin.attributes.create') }}"><i class="fa fa-plus"></i> Create pack</a></li>
                     </ul>
                     </li>
+                        <li class="@if(request()->segment(2) == 'attributes') active @endif">
+                            <a href="#">
+                                <i class="fa fa-gear"></i> <span>Attributes</span>
+                                <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('admin.attributes.index') }}"><i class="fa fa-circle-o"></i> List attributes</a></li>
+                                <li><a href="{{ route('admin.attributes.create') }}"><i class="fa fa-plus"></i> Create attribute</a></li>
+                            </ul>
+                        </li>
                     <li class="@if(request()->segment(2) == 'brands') active @endif">
                     <a href="#">
                         <i class="fa fa-tag"></i> <span>Brands</span>
