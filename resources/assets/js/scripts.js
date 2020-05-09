@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     $('#is_free').on('change', function () {
         console.log($(this).val());

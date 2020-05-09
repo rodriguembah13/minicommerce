@@ -41,7 +41,9 @@ mix
             'node_modules/font-awesome/css/font-awesome.css',
             'node_modules/select2/dist/css/select2.css',
             'resources/assets/css/drift-basic.min.css',
-            'resources/assets/css/front.css'
+            'resources/assets/css/front.css',
+            'node_modules/owl.carousel/dist/assets/owl.carousel.css',
+            'node_modules/aos/dist/aos.css',
         ],
         'public/css/style.min.css'
     )
@@ -50,7 +52,10 @@ mix
             'node_modules/bootstrap/dist/js/bootstrap.js',
             'node_modules/select2/dist/js/select2.js',
             'resources/assets/js/owl.carousel.min.js',
-            'resources/assets/js/Drift.min.js'
+            'resources/assets/js/Drift.min.js',
+            'node_modules/owl.carousel/dist/owl.carousel.js',
+            'node_modules/aos/dist/aos.js',
+            'node_modules/jquery.stellar/jquery.stellar.js',
         ],
         'public/js/front.min.js'
     )

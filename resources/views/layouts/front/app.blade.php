@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
-    <title>Laracom - Laravel FREE E-Commerce Software</title>
+    <title>Mini-ccom - Mrpropre</title>
     <meta name="description" content="Modern open-source e-commerce framework for free">
     <meta name="tags" content="modern, opensource, open-source, e-commerce, framework, free, laravel, php, php7, symfony, shop, shopping, responsive, fast, software, blade, cart, test driven, adminlte, storefront">
     <meta name="author" content="Jeff Simons Decena">
@@ -92,7 +92,16 @@
                     </button>
                     <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name') }}</a>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-6">
+                        <ul class="header-menu">
+                            <li class="active"><a href="{{ route('home') }}" class="nav-link">Accueil</a></li>
+                            <li><a href="{{ route('home') }}" class="nav-link">Nos tarifs</a></li>
+                            <li><a href="{{ route('home') }}" class="nav-link">Apropos</a></li>
+                            <li><a href="{{ route('home') }}" class="nav-link">Blog</a></li>
+                            <li><a href="{{ route('home') }}" class="nav-link">Contact</a></li>
+                        </ul>
+                </div>
+                <div class="col-md-4">
                     @include('layouts.front.header-cart')
                 </div>
             </div>

@@ -21,7 +21,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
 
-
 /* ************************
      COMMON STYLES
 ************************** */
@@ -194,15 +193,15 @@ li.menubar-cart a {
         HERO AREA
 ************************** */
 .top-area {
-    background: #fff url('../images/banner.jpg') no-repeat;
+    background: #fff url('../images/hero_3.jpg') no-repeat;
     background-size: cover;
     background-position: center;
-    height: 760px;
+    height: 560px;
     position: relative;
 }
 .hero-title {
-    font-size: 80px;
-    line-height: 100px;
+    font-size: 50px;
+   /* line-height: 100px;*/
     font-weight: 400;
     padding-bottom: 0px;
     color: #333;
@@ -513,7 +512,23 @@ textarea, select {
     color: #222;
 }
 
-
+.header-menu, .footer-social {
+    list-style: outside none none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+.header-menu li {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+.header-menu a {
+    color: #000000;
+}
+.header-menu a:hover, .footer-social a:hover {
+    color: #d89522
+}
 
 
 /* ************************
@@ -656,4 +671,70 @@ a:hover img {
 }
 #productAttribute {
     width: 312px;
+}
+
+/*new code*/
+
+.scissors {
+    position: relative;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    font-size: 4rem;
+    color: #dc3545;
+}
+.text-center {
+    text-align: center !important;
+}
+.site-section {
+    padding: 7rem 0;
+}
+.nonloop-block-13{
+    padding: 0;
+}
+.mb-5, .my-5 {
+    margin-bottom: 3rem !important;
+}
+.justify-content-center {
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+.item-1 {
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+}
+.section-3 {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.section-3::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.service-1 .service-1-icon {
+    background: #dc3545;
+    width: 90px;
+    height: 90px;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    border: 4px solid #dc3545;
+    border-radius: 50%;
+    color: #fff;
+}
+.service-1 {
+    text-align: center;
 }
