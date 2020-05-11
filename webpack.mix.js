@@ -29,6 +29,7 @@ mix
         [
             'resources/assets/js/jquery-2.2.3.min.js',
             'node_modules/bootstrap/dist/js/bootstrap.js',
+            'node_modules/bootstrap-input-spinner/src/bootstrap-input-spinner.js',
             'node_modules/select2/dist/js/select2.js',
             'node_modules/datatables/media/js/jquery.dataTables.js',
             'resources/assets/admin-lte/js/app.js'

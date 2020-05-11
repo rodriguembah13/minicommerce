@@ -29,7 +29,7 @@
                 <ul class="treeview-menu">
                     @if($user->hasPermission('view-product'))<li><a href="{{ route('admin.products.index') }}"><i class="fa fa-circle-o"></i> List products</a></li>@endif
                     @if($user->hasPermission('create-product'))<li><a href="{{ route('admin.products.create') }}"><i class="fa fa-plus"></i> Create product</a></li>@endif
-                    <li class="@if(request()->segment(2) == 'attributes') active @endif">
+                    <li class="@if(request()->segment(2) == 'packs') active @endif">
                     <a href="#">
                         <i class="fa fa-gear"></i> <span>Pack Product</span>
                         <span class="pull-right-container">

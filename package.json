@@ -24,6 +24,7 @@
     "admin-lte": "^2.4.8",
     "aos": "^2.3.4",
     "bootstrap": "^3.3.7",
+    "bootstrap-input-spinner": "^1.13.4",
     "datatables": "^1.10.13",
     "font-awesome": "^4.7.0",
     "ionicons": "^3.0.0",

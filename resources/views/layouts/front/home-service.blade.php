@@ -16,52 +16,7 @@
             <div class="col-12">
 
                 <div class="nonloop-block-13 owl-carousel d-flex">
-                    @include('front.packs.pack-list', ['packs' => $pack])
-                  {{--  <div class="item-1 h">
-                        <img src="images/img_1.jpg" alt="Image" class="img-fluid">
-                        <div class="item-1-contents">
-                            <h3>Haircut</h3>
-                            <ul>
-                                <li class="d-flex"><span>Men's Cut</span> <span class="price ml-auto">$29.00</span></li>
-                                <li class="d-flex"><span>Men's Cut with Shampoo and Blow Dry</span><span class="price ml-auto">$10.00</span></li>
-                                <li class="d-flex"><span>Ladie's Cut with Shampoo and Blow Dry</span><span class="price ml-auto">$32.00</span></li>
-                                <li class="d-flex"><span>Head Shave</span><span class="price ml-auto">$23.00</span></li>
-                                <li class="d-flex"><span>Hair Art</span><span class="price ml-auto">$54.00</span></li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <div class="item-1 h">
-                        <img src="images/img_2.jpg" alt="Image" class="img-fluid">
-                        <div class="item-1-contents">
-                            <h3>Hair Styling</h3>
-                            <ul>
-                                <li class="d-flex"><span>Shampoo</span> <span class="price ml-auto">$29.00</span></li>
-                                <li class="d-flex"><span>Blow Dry</span><span class="price ml-auto">$10.00</span></li>
-                                <li class="d-flex"><span>Iron</span><span class="price ml-auto">$32.00</span></li>
-                                <li class="d-flex"><span>Brazilian Blow Out</span><span class="price ml-auto">$23.00</span></li>
-                                <li class="d-flex"><span>Hair Art</span><span class="price ml-auto">$54.00</span></li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <div class="item-1 h">
-                        <img src="images/img_3.jpg" alt="Image" class="img-fluid">
-                        <div class="item-1-contents">
-                            <h3>Hair Scalp Care</h3>
-                            <ul>
-                                <li class="d-flex"><span>Shampoo</span> <span class="price ml-auto">$29.00</span></li>
-                                <li class="d-flex"><span>Blow Dry</span><span class="price ml-auto">$10.00</span></li>
-                                <li class="d-flex"><span>Iron</span><span class="price ml-auto">$32.00</span></li>
-                                <li class="d-flex"><span>Brazilian Blow Out</span><span class="price ml-auto">$23.00</span></li>
-                                <li class="d-flex"><span>Hair Art</span><span class="price ml-auto">$54.00</span></li>
-                            </ul>
-                        </div>
-
-                    </div>--}}
-
+                    @include('front.packs.pack-list', ['packs' => $pack->where('status', 1)])
                 </div>
 
             </div>
@@ -149,4 +104,95 @@
         </div>
     </div>
 </div>
+@section('css')
+    <style type="text/css">
 
+        .item-1 .item-1-contents {
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-top-color: rgb(204, 204, 204);
+            border-top-style: solid;
+            border-top-width: 1px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-top: none;
+            position: relative;
+        }
+        .item-1 .item-1-contents h3::after {
+            left: 0;
+            bottom: 0;
+            content: "";
+            width: 40px;
+            height: 2px;
+            background: #dc3545;
+            position: absolute;
+        }
+        .item-1 .item-1-contents h3 {
+            position: relative;
+            color: #dc3545;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+        }
+        .item-1 .item-1-contents ul {
+            list-style: none;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        .item-1 .item-1-contents ul li {
+            list-style: none;
+            margin: 0 0 10px 0;
+            padding: 0;
+            position: relative;
+        }
+        .item-1 .item-1-contents ul li .price {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 90px;
+            flex: 0 0 90px;
+            text-align: right;
+        }
+        .d-flex {
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+        }
+        .item-1 .item-1-contents ul li .quantity {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 90px;
+            flex: 0 0 40px;
+            text-align: left;
+        }
+        .section-3::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            content: "";
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .scissors.text-center::after {
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+        .scissors.primary-color-icon::after {
+            color: #dc3545;
+        }
+        .scissors::after {
+            bottom: 0;
+            left: 0;
+            font-size: 22px;
+            content: "\f0c4";
+            font-family: 'icomoon';
+            position: absolute;
+            color: #ccc;
+        }
+    </style>
+@endsection
+@section('js')
+    <script type="text/javascript">
+
+    </script>
+@endsection

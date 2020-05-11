@@ -272,7 +272,7 @@ jQuery(document).ready(function($) {
     siteDatePicker();
 
     var siteSticky = function() {
-        $(".js-sticky-header").sticky({topSpacing:0});
+        //$(".js-sticky-header").sticky({topSpacing:0});
     };
     siteSticky();
 
