@@ -81,6 +81,14 @@ Route::namespace('Auth')->group(function () {
 
 Route::namespace('Front')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/about', [
+        'as' => 'about_path',
+        'uses' => 'HomeController@about'
+    ]);
+    Route::get('/blog', [
+        'as' => 'blog_path',
+        'uses' => 'HomeController@blog'
+    ]);
     Route::group(['middleware' => ['auth', 'web']], function () {
 
         Route::namespace('Payments')->group(function () {
