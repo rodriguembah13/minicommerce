@@ -1,8 +1,9 @@
 <section class="content-header">
     <h1>
-        Dashboard
-        <small>Control panel</small>
+
+{{--        <small>Control panel</small>--}}
     </h1>
+    <br>
     <ol class="breadcrumb">
         @foreach($breadcumbs as $breadcumb)
             @if($loop->last)

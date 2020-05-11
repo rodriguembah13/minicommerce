@@ -50,6 +50,7 @@
         <div class="title error500">
             <p>Ooops, server error occurred.</p> Please check again later.
         </div>
+       {{-- <p>{{$error}}</p>--}}
     </div>
 </div>
 </body>

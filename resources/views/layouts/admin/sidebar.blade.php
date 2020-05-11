@@ -38,7 +38,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ route('admin.packs.index') }}"><i class="fa fa-circle-o"></i> List pack</a></li>
-                        <li><a href="{{ route('admin.attributes.create') }}"><i class="fa fa-plus"></i> Create pack</a></li>
+                        <li><a href="{{ route('admin.packs.create') }}"><i class="fa fa-plus"></i> Create pack</a></li>
                     </ul>
                     </li>
                         <li class="@if(request()->segment(2) == 'attributes') active @endif">

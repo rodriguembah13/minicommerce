@@ -35,8 +35,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
                 Route::resource('customers', 'CustomerController');
                 Route::resource('customers.addresses', 'CustomerAddressController');
             });
-            Route::namespace('PakageProduits')->group(function () {
-                Route::resource('packs', 'PakageProduitController');
+            Route::namespace('Packs')->group(function () {
+                Route::resource('packs', 'PackController');
+                Route::delete('packs/{id}/pack', 'PackController@delete')->name('packs.delete');
+                Route::post('packs/{id}/modify', 'PackController@modify')->name('packs.modify');
             });
             Route::namespace('Categories')->group(function () {
                 Route::resource('categories', 'CategoryController');

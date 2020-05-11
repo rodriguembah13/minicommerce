@@ -49,6 +49,7 @@ mix
     )
     .scripts(
         [
+            'node_modules/jquery/dist/jquery.js',
             'node_modules/bootstrap/dist/js/bootstrap.js',
             'node_modules/select2/dist/js/select2.js',
             'resources/assets/js/owl.carousel.min.js',

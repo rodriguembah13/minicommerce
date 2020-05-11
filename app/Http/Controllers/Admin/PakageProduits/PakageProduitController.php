@@ -43,7 +43,7 @@ class PakageProduitController extends Controller
             return $this->transformProduct($item);
         })->all();*/
 
-        return view('admin.pack-product.list', [
+        return view('admin.pack-products.list', [
             'products' => $this->pakageProductRepo->paginateArrayResults($list->all(), 25)
         ]);
     }

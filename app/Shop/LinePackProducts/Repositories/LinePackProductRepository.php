@@ -1,52 +1,53 @@
 <?php
 
-namespace App\Shop\PakageProduits\Repositories;
+namespace App\Shop\LinePackProducts\Repositories;
 
-use App\Shop\PakageProduits\PakageProduit;
+use App\Shop\LinePackProducts\LinePackProduct;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use Jsdecena\Baserepo\BaseRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Shop\PakageProduits\Repositories\Interfaces\PakageProduitRepositoryInterface;
+use App\Shop\LinePackProducts\Repositories\Interfaces\LinePackProductRepositoryInterface;
 
-class PakageProduitRepository extends BaseRepository implements PakageProduitRepositoryInterface
+class LinePackProductRepository extends BaseRepository implements LinePackProductRepositoryInterface
 {
 	/**
-     * PakageProduitRepository constructor.
+     * LinePackProductRepository constructor.
      * 
-     * @param PakageProduit $dummy
+     * @param LinePackProduct $dummy
      */
-    public function __construct(PakageProduit $dummy)
+    public function __construct(LinePackProduct $dummy)
     {
         parent::__construct($dummy);
         $this->model = $dummy;
     }
 
     /**
-     * List all the PakageProduits
+     * List all the LinePackProducts
      *
      * @param string $order
      * @param string $sort
      * @param array $except
      * @return \Illuminate\Support\Collection
      */
-    public function listPakageProduits(string $order = 'id', string $sort = 'desc', $except = []) : Collection
+    public function listLinePackProducts(string $order = 'id', string $sort = 'desc', $except = []) : Collection
     {
         return $this->model->orderBy($order, $sort)->get()->except($except);
     }
 
     /**
-     * Create PakageProduit
+     * Create LinePackProduct
      *
      * @param array $params
      *
-     * @return PakageProduit
+     * @return LinePackProduct
      * @throws InvalidArgumentException
      */
-    public function createPakageProduit(array $params) : PakageProduit
+    public function createLinePackProduct(array $params) : LinePackProduct
     {
         try {
-        	return PakageProduit::create($params);
+        	return LinePackProduct::create($params);
         } catch (QueryException $e) {
             throw new InvalidArgumentException($e->getMessage());
         }
@@ -56,11 +57,11 @@ class PakageProduitRepository extends BaseRepository implements PakageProduitRep
      * Update the dummy
      *
      * @param array $params
-     * @return PakageProduit
+     * @return LinePackProduct
      */
-    public function updatePakageProduit(array $params) : PakageProduit
+    public function updateLinePackProduct(array $params) : LinePackProduct
     {
-        $dummy = $this->findPakageProduitById($this->model->id);
+        $dummy = $this->findLinePackProductById($this->model->id);
         $dummy->update($params);
         return $dummy;
     }
@@ -68,10 +69,10 @@ class PakageProduitRepository extends BaseRepository implements PakageProduitRep
     /**
      * @param int $id
      * 
-     * @return PakageProduit
+     * @return LinePackProduct
      * @throws ModelNotFoundException
      */
-    public function findPakageProduitById(int $id) : PakageProduit
+    public function findLinePackProductById(int $id) : LinePackProduct
     {
         try {
             return $this->findOneOrFail($id);
@@ -85,7 +86,7 @@ class PakageProduitRepository extends BaseRepository implements PakageProduitRep
      *
      * @return bool
      */
-    public function deletePakageProduit() : bool
+    public function deleteLinePackProduct() : bool
     {
         return $this->model->delete();
     }

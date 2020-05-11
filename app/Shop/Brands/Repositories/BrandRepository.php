@@ -4,9 +4,9 @@ namespace App\Shop\Brands\Repositories;
 
 use Jsdecena\Baserepo\BaseRepository;
 use App\Shop\Brands\Brand;
-use App\Shop\Brands\Exceptions\BrandNotFoundErrorException;
-use App\Shop\Brands\Exceptions\CreateBrandErrorException;
-use App\Shop\Brands\Exceptions\UpdateBrandErrorException;
+use App\Shop\Brands\Exceptions\LinePackProductNotFoundErrorException;
+use App\Shop\Brands\Exceptions\CreateLinePackProductErrorException;
+use App\Shop\Brands\Exceptions\UpdateLinePackProductErrorException;
 use App\Shop\Products\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -29,14 +29,14 @@ class BrandRepository extends BaseRepository implements BrandRepositoryInterface
      * @param array $data
      *
      * @return Brand
-     * @throws CreateBrandErrorException
+     * @throws CreateLinePackProductErrorException
      */
     public function createBrand(array $data) : Brand
     {
         try {
             return $this->create($data);
         } catch (QueryException $e) {
-            throw new CreateBrandErrorException($e);
+            throw new CreateLinePackProductErrorException($e);
         }
     }
 
@@ -44,14 +44,14 @@ class BrandRepository extends BaseRepository implements BrandRepositoryInterface
      * @param int $id
      *
      * @return Brand
-     * @throws BrandNotFoundErrorException
+     * @throws LinePackProductNotFoundErrorException
      */
     public function findBrandById(int $id) : Brand
     {
         try {
             return $this->findOneOrFail($id);
         } catch (ModelNotFoundException $e) {
-            throw new BrandNotFoundErrorException($e);
+            throw new LinePackProductNotFoundErrorException($e);
         }
     }
 
@@ -60,14 +60,14 @@ class BrandRepository extends BaseRepository implements BrandRepositoryInterface
      * @param int $id
      *
      * @return bool
-     * @throws UpdateBrandErrorException
+     * @throws UpdateLinePackProductErrorException
      */
     public function updateBrand(array $data) : bool
     {
         try {
             return $this->update($data);
         } catch (QueryException $e) {
-            throw new UpdateBrandErrorException($e);
+            throw new UpdateLinePackProductErrorException($e);
         }
     }
 

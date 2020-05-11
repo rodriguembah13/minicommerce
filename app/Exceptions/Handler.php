@@ -60,6 +60,7 @@ class Handler extends ExceptionHandler
             );
         } elseif ($exception instanceof HttpException) {
             Log::info($exception->getMessage());
+            Log::info($exception->getTrace());
             return response()->view('layouts.errors.503', ['error' => $exception->getTrace()], 500);
         }
 

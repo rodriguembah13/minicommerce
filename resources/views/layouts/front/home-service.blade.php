@@ -16,8 +16,8 @@
             <div class="col-12">
 
                 <div class="nonloop-block-13 owl-carousel d-flex">
-
-                    <div class="item-1 h">
+                    @include('front.packs.pack-list', ['packs' => $pack])
+                  {{--  <div class="item-1 h">
                         <img src="images/img_1.jpg" alt="Image" class="img-fluid">
                         <div class="item-1-contents">
                             <h3>Haircut</h3>
@@ -60,7 +60,7 @@
                             </ul>
                         </div>
 
-                    </div>
+                    </div>--}}
 
                 </div>
 

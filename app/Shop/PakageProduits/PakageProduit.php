@@ -3,17 +3,18 @@
 namespace App\Shop\PakageProduits;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 class PakageProduit extends Model
 {
-
     /**
-     * @param string $term
-     * @return Collection
+     * The attributes that are mass assignable.
+     *
+     * @var array
      */
-    public function searchPakageProduct(string $term) : Collection
-    {
-        return self::search($term)->get();
-    }
+    protected $fillable = [
+        'name',
+        'description',
+        'quantity',
+        'slug',
+    ];
 }
