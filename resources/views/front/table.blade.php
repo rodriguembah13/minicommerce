@@ -2,7 +2,20 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('content')
     <div class="container">
+        <div class="row">
         <h2>Packs:{{$pack->name}}</h2>
+        <div class="card">
+            <div class="card-body">
+        @foreach($pack->linePacks as $line)
+                    <span class="label label-info">Product: {{$line->product->name}}</span><span class="label label-success">Quantity:{{$line->quantity}}</span>
+
+        @endforeach
+            </div>
+        </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
         <hr>
         <table class="table table-bordered table-responsive">
             <thead>
@@ -22,7 +35,7 @@
             <tr id="product-{{$product->id}}">
                 <th scope="row">{{$product->id}}</th>
                 <td>{{$product->name}}</td>
-                <td>{{ config('cart.currency') }} {{$product->price}}</td>
+                <td>{{--{{ config('cart.currency') }} --}}{{$product->price}}</td>
 
                 <td><input  id="quantity-{{$product->id}}" name="name-{{$product->id}}" type="number" class="form-control" value="0" step="1" min="0">
                     {{--<div class="input-group spinner">
@@ -32,7 +45,7 @@
                             <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
                         </div></div>--}}
                 </td>
-                <td><div class="btn-group" role="group" aria-label="Basic example">
+                <td><div class="btn-group-xs" role="group" aria-label="Basic example" style="display: ruby">
                         <button type="button" class="btn btn-success btn-sm" id="add-to-cart-table" onclick="getItem({{$product->id}})">add</button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="deleteItem({{$product->id}})">Del</button>
                     </div></td>
@@ -40,8 +53,8 @@
                     <span id="etat-nok-{{$product->id}}" class="bg-danger hidden"><i class="fa fa-times-circle"></i></span>
                     <span id="etat-m-{{$product->id}}" class="bg-warning "><i class="fa fa-minus-square"></i></span>
                 </td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+                <td><span id="in-pack-{{$product->id}}"></span></td>
+                <td><span id="hors-pack-{{$product->id}}"></span></td>
             </tr>
             @endforeach
             </tbody>
@@ -108,6 +121,7 @@
             var statusok="#etat-ok-"+id;
             var statusm="#etat-m-"+id;
             var statusnok="#etat-nok-"+id;
+            var inpack="#in-pack-"+id;
             var _token   = $('meta[name="csrf-token"]').attr('content');
            // alert($(qte).val());
             $.ajax({
@@ -118,7 +132,9 @@
 
                 success:function(data){
 
-                    alert(data.success);
+                    alert(data[0].message);
+                    $('#hors-pack-'+id).text(data[0].horsPack);
+                    $('#in-pack-'+id).text(data[0].inPack);
                     $(statusok).removeClass('hidden');
                     $(statusm).addClass('hidden');
                 }
@@ -142,13 +158,14 @@
                 type:'POST',
                 url:'/ajaxRequestDeleteTable',
 
-                data:{product_id:id,pack_id:$('#itemValue').text()},
+                data:{product_id:id,pack_id:$('#itemValue').text(),_token: _token},
 
                 success:function(data){
 
                     alert(data.success);
                     $(statusok).removeClass('hidden');
                     $(statusm).addClass('hidden');
+                    window.location.reload(true);
                 }
                 ,error: function(xhr, status, error) {
                     $(statusnok).removeClass('hidden');

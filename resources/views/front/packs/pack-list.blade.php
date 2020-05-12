@@ -8,7 +8,7 @@
                 <li class="d-flex"><span class="quantity">{{$line->quantity}}</span> <span>{{$line->product->name}}</span> <span class="price ml-auto">${{$line->product->price}}</span></li>
             @endforeach
         </ul>
-        <a class="btn btn-primary" href="{{ route('front.table', $pack->id) }}">choisir</a>
+        <a class="btn btn-primary" href="{{ route('front.table', $pack->id) }}">Commander</a>
     </div>
 
 </div>
