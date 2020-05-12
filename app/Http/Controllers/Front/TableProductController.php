@@ -73,7 +73,7 @@ class TableProductController extends Controller
     public function ajaxRequestPost(Request $request)
 
     {
-        $input = $request->all();
+        $responseArray = [];
         $quantity=$request->get('quantity');
         $product = $this->productRepo->findProductById($request->get('product_id'));
         $pack=$this->packRepo->findPackById($request->get('pack_id'));
@@ -85,6 +85,7 @@ class TableProductController extends Controller
         if (!in_array($product->id,$existing)){
             return response()->json(['error'=>'no in pack'.$existing[0]], 404);
         }
+        $inpack=$this->lineRepo->findOneBy(['product_id'=>$product->id,'pack_id'=>$pack->id])->quantity;
        /* if ($this->lineRepo->findOneBy(['product_id'=>$product->id,'pack_id'=>$pack->id])->quantity > $quantity){
             return response()->json(['error'=>'quantity error'.$existing[0]], 404);
         }*/
@@ -112,16 +113,46 @@ class TableProductController extends Controller
 
         $this->cartRepo->addToCart($product, $request->get('quantity'), $options);
 
-
-        return response()->json(['success'=>'Got Simple Ajax Request.'.$quantity]);
+        $responseArray[] = [
+            'id' => '',
+            'message' => 'product to cart',
+            'horsPack' => $quantity-$inpack,
+            'inPack' => $inpack,
+            'total' => '',
+        ];
+        return response()->json($responseArray);
 
     }
+    /**
+
+     * Create a new controller instance.
+
+     *
+
+     * @return void
+
+     */
     public function ajaxRequestDeleteCart(Request $request){
-        //$input = $request->all();
+        $product = $this->productRepo->findProductById($request->get('product_id'));
+        $pack=$this->packRepo->findPackById($request->get('pack_id'));
+        //$cart=$this->cartRepo->findOneBy(['name'=>$product->name]);
+        $this->cartRepo->clearCart();
         return response()->json(['success'=>'Got Simple Ajax Request.']);
     }
+    /**
+
+     * Create a new controller instance.
+
+     *
+
+     * @return void
+
+     */
     public function ajaxRequestGet(Request $request){
-        $input = $request->all();
+        $product = $this->productRepo->findProductById($request->get('product_id'));
+        $pack=$this->packRepo->findPackById($request->get('pack_id'));
+        $cart=$this->cartRepo->findOneBy(['name'=>$product->name]);
+        $this->cartRepo->removeToCart($cart->id);
         return response()->json(['success'=>'Got Simple Ajax Request.']);
     }
 }

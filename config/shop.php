@@ -2,7 +2,7 @@
 
 return [
     'shipping_token' => env('SHIPPING_API_TOKEN'),
-    'name' => env('SHOP_NAME', 'Laracom'),
+    'name' => env('SHOP_NAME', 'mini-com'),
     'country' => env('SHOP_COUNTRY_ISO', 'US'),
     'country_id' => env('SHOP_COUNTRY_ID', 226),
     'weight' => env('SHOP_WEIGHT', 'lbs'),
