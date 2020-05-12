@@ -96,8 +96,8 @@
                         <ul class="header-menu">
                             <li class="active"><a href="{{ route('home') }}" class="nav-link">Accueil</a></li>
                             <li><a href="{{ route('home') }}" class="nav-link">Nos tarifs</a></li>
-                            <li><a href="{{ route('home') }}" class="nav-link">Apropos</a></li>
-                            <li><a href="{{ route('home') }}" class="nav-link">Blog</a></li>
+                            <li><a href="{{ route('about_path') }}" class="nav-link">Apropos</a></li>
+                            <li><a href="{{ route('blog_path') }}" class="nav-link">Blog</a></li>
                             <li><a href="{{ route('home') }}" class="nav-link">Contact</a></li>
                         </ul>
                 </div>

@@ -38,4 +38,20 @@ class HomeController
 
         return view('front.index', compact('cat1', 'cat2','pack'));
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function about()
+    {
+        return view('front.pages.about');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function blog()
+    {
+        return view('front.pages.blog');
+    }
 }
