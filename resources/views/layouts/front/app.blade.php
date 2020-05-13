@@ -56,6 +56,7 @@
         <a href="https://www.enable-javascript.com/" target="_blank">Read more</a>
     </p>
 </noscript>
+@include('layouts.front.css-front')
 <section>
     <div class="hidden-xs">
         <div class="container">
