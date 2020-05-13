@@ -89,6 +89,14 @@ Route::namespace('Front')->group(function () {
         'as' => 'blog_path',
         'uses' => 'HomeController@blog'
     ]);
+    Route::get('/contact', [
+        'as' => 'contact_path',
+        'uses' => 'ContactController@index'
+    ]);
+    Route::post('/contact', [
+        'as' => 'post_contact_path',
+        'uses' => 'ContactController@store'
+    ]);
     Route::group(['middleware' => ['auth', 'web']], function () {
 
         Route::namespace('Payments')->group(function () {

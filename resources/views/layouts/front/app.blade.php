@@ -98,7 +98,7 @@
                             <li><a href="{{ route('home') }}" class="nav-link">Nos tarifs</a></li>
                             <li><a href="{{ route('about_path') }}" class="nav-link">Apropos</a></li>
                             <li><a href="{{ route('blog_path') }}" class="nav-link">Blog</a></li>
-                            <li><a href="{{ route('home') }}" class="nav-link">Contact</a></li>
+                            <li><a href="{{ route('contact_path') }}" class="nav-link">Contact</a></li>
                         </ul>
                 </div>
                 <div class="col-md-4">
