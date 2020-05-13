@@ -156,7 +156,6 @@ return [
         Laravel\Cashier\CashierServiceProvider::class,
         Jsdecena\Baserepo\BaseRepositoryProvider::class,
         \Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-
         MercurySeries\Flashy\FlashyServiceProvider::class,
 
         /*
@@ -220,8 +219,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-
-        'Flashy' => MercurySeries\Flashy\Flashy::class,
 
     ],
 

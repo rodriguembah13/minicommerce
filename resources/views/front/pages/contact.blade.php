@@ -63,7 +63,7 @@
   
                 <div class="form-group row {{ $errors->has('name') ? 'has-error' : '' }}">
                   <div class="col-md-12">
-                    <textarea name="" id="" class="form-control" name="message" placeholder="Message." cols="30" rows="10">{{ old('message') }}</textarea>
+                    <textarea name="message" id="" class="form-control" placeholder="Message." cols="30" rows="10">{{ old('message') }}</textarea>
                     {!! $errors->first('message', '<span class="help-block">:message</span>') !!}
                   </div>
                 </div>

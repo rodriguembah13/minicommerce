@@ -51,11 +51,11 @@ class ContactController extends Controller
         $message = Message::create($request->only('prenom', 'name', 'email', 'message'));
         
         Mail::to(config('mpropre.admin_support_mail'))
-            ->send(new ContactMessagesCreated($message));
+            ->queue(new ContactMessagesCreated($message));
 
-        Flashy('Nous vous répondrons dans les plus brèfs delais !');
+        flashy('Nous vous répondrons dans les plus brèfs delais !');
 
-        return redirect()->route('about_path');
+        return redirect()->route('home');
     }
     
 
