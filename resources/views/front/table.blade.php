@@ -65,6 +65,7 @@
     <div class="cartfixed" id="cart1">
         <p>Produit</p>
     </div>
+
 @endsection
 @section('css')
     <style type="text/css">

@@ -316,10 +316,10 @@ jQuery(document).ready(function($) {
     siteScroll();
 
     // Stellar
-    $.stellar({
+   /* $.stellar({
         horizontalScrolling: false,
         responsive: true,
-    });
+    });*/
 
 
     var counter = function() {
