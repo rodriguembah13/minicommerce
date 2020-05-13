@@ -45,19 +45,29 @@ mix
             'resources/assets/css/front.css',
             'node_modules/owl.carousel/dist/assets/owl.carousel.css',
             'node_modules/aos/dist/aos.css',
+            'resources/assets/css/jquery.fancybox.min.css',
+            'resources/assets/css/owl.theme.default.min.css',
         ],
         'public/css/style.min.css'
     )
     .scripts(
         [
-            'node_modules/jquery/dist/jquery.js',
+            //'node_modules/jquery/dist/jquery.js',
+            'resources/assets/js/jquery-3.3.1.min.js',
             'node_modules/bootstrap/dist/js/bootstrap.js',
             'node_modules/select2/dist/js/select2.js',
             'resources/assets/js/owl.carousel.min.js',
             'resources/assets/js/Drift.min.js',
+            'resources/assets/js/jquery.animateNumber.min.js',
+            'resources/assets/js/jquery.countdown.min.js',
+            'resources/assets/js/jquery.easing.1.3.js',
+            'resources/assets/js/jquery.fancybox.min.js',
+            'resources/assets/js/jquery.magnific-popup.min.js',
+            'resources/assets/js/jquery.sticky.min.js',
+            'resources/assets/js/jquery.waypoints.min.js',
             'node_modules/owl.carousel/dist/owl.carousel.js',
             'node_modules/aos/dist/aos.js',
-            'node_modules/jquery.stellar/jquery.stellar.js',
+            'resources/assets/js/jquery.stellar.min.js',
         ],
         'public/js/front.min.js'
     )

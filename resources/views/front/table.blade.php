@@ -65,6 +65,7 @@
     <div class="cartfixed" id="cart1">
         <p>Produit</p>
     </div>
+
 @endsection
 @section('css')
     <style type="text/css">
@@ -167,7 +168,7 @@
            // alert($(qte).val());
             $.ajax({
                 type:'POST',
-                url:'/ajaxRequestTable',
+                url:'/ajaxRequestGetTable',
 
                 data:{quantity:$(qte).val(), product_id:id,pack_id:$('#itemValue').text(),_token: _token},
 
@@ -247,7 +248,7 @@
         }
         function addArticle(articleId) {
             setInCart(articleId,$('#quantity-'+articleId).val());
-           // alert('test')
+           getItem(articleId);
             checkCart();
         }
         function removeArticle(articleId) {

@@ -193,18 +193,19 @@ li.menubar-cart a {
         HERO AREA
 ************************** */
 .top-area {
-    background: #fff url('../images/hero_3.jpg') no-repeat;
+   background: url('../images/hero_3.jpg') no-repeat #0170bf;
     background-size: cover;
     background-position: center;
-    height: 560px;
+    height: 400px;
     position: relative;
+    background-blend-mode: multiply;
 }
 .hero-title {
     font-size: 50px;
    /* line-height: 100px;*/
     font-weight: 400;
     padding-bottom: 0px;
-    color: #333;
+    color: #ffffff;
 }
 .hero-text {
     font-size: 18px;

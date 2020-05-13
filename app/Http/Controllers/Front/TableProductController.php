@@ -140,19 +140,24 @@ class TableProductController extends Controller
         return response()->json(['success'=>'Got Simple Ajax Request.']);
     }
     /**
+ * Create a new controller instance.
+ *
 
-     * Create a new controller instance.
-
-     *
-
-     * @return void
-
-     */
+     * @return \Illuminate\Http\JsonResponse
+ */
     public function ajaxRequestGet(Request $request){
+        $responseArray = [];
+        $quantity=$request->get('quantity');
         $product = $this->productRepo->findProductById($request->get('product_id'));
         $pack=$this->packRepo->findPackById($request->get('pack_id'));
-        $cart=$this->cartRepo->findOneBy(['name'=>$product->name]);
-        $this->cartRepo->removeToCart($cart->id);
-        return response()->json(['success'=>'Got Simple Ajax Request.']);
+        $inpack=$this->lineRepo->findOneBy(['product_id'=>$product->id,'pack_id'=>$pack->id])->quantity;
+        $responseArray[] = [
+            'id' => '',
+            'message' => 'product to cart',
+            'horsPack' => $quantity-$inpack,
+            'inPack' => $inpack,
+            'total' => '',
+        ];
+        return response()->json($responseArray);
     }
 }

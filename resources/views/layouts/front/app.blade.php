@@ -46,8 +46,8 @@
     @yield('css')
     <meta property="og:url" content="{{ request()->url() }}"/>
     @yield('og')
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>-->
 </head>
 <body>
 <noscript>
@@ -56,6 +56,7 @@
         <a href="https://www.enable-javascript.com/" target="_blank">Read more</a>
     </p>
 </noscript>
+@include('layouts.front.css-front')
 <section>
     <div class="hidden-xs">
         <div class="container">
@@ -90,7 +91,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name') }}</a>
+                    <a class="navbar-brand" style="" href="{{ route('home') }}"><img id="logo" width="150" style="height: 60px" src="images/logo-m-propre.jpg" alt="Logo" class=""></a>
                 </div>
                 <div class="col-md-6">
                         <ul class="header-menu">

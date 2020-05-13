@@ -124,6 +124,6 @@ Route::namespace('Front')->group(function () {
     Route::get("{product}", 'ProductController@show')->name('front.get.product');
     Route::get("table/{id}", 'TableProductController@index')->name('front.table');
     Route::post('ajaxRequestTable', 'TableProductController@ajaxRequestPost')->name('front.posttable');
-    Route::get('ajaxRequestGetTable', 'TableProductController@ajaxRequestGet')->name('front.gettable');
+    Route::post('ajaxRequestGetTable', 'TableProductController@ajaxRequestGet')->name('front.gettable');
     Route::post('ajaxRequestDeleteTable', 'TableProductController@ajaxRequestDeleteCart')->name('front.deletetable');
 });
