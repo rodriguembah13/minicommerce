@@ -167,7 +167,7 @@
            // alert($(qte).val());
             $.ajax({
                 type:'POST',
-                url:'/ajaxRequestTable',
+                url:'/ajaxRequestGetTable',
 
                 data:{quantity:$(qte).val(), product_id:id,pack_id:$('#itemValue').text(),_token: _token},
 
@@ -247,7 +247,7 @@
         }
         function addArticle(articleId) {
             setInCart(articleId,$('#quantity-'+articleId).val());
-           // alert('test')
+           getItem(articleId);
             checkCart();
         }
         function removeArticle(articleId) {
