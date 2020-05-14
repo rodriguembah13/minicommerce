@@ -30,6 +30,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
                 Route::resource('products', 'ProductController');
                 Route::get('remove-image-product', 'ProductController@removeImage')->name('product.remove.image');
                 Route::get('remove-image-thumb', 'ProductController@removeThumbnail')->name('product.remove.thumb');
+                Route::get('import', 'ProductController@getImport')->name('import');
+                Route::post('import_parse', 'ProductController@parseImport')->name('import_parse');
+                Route::post('import_process', 'ProductController@processImport')->name('import_process');
             });
             Route::namespace('Customers')->group(function () {
                 Route::resource('customers', 'CustomerController');

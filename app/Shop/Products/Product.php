@@ -78,7 +78,9 @@ class Product extends Model implements Buyable
     {
         return $this->belongsToMany(Category::class);
     }
-
+public function getFillImport(){
+        return $this->fillable;
+}
     /**
      * Get the identifier of the Buyable item.
      *

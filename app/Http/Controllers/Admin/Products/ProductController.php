@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Products;
 
+use App\Shop\CsvDatas\Requests\CsvImportRequest;
 use App\Shop\Attributes\Repositories\AttributeRepositoryInterface;
 use App\Shop\AttributeValues\Repositories\AttributeValueRepositoryInterface;
 use App\Shop\Brands\Repositories\BrandRepositoryInterface;
 use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Shop\CsvDatas\CsvData;
+use App\Shop\CsvDatas\Repositories\Interfaces\CsvDataRepositoryInterface;
 use App\Shop\ProductAttributes\ProductAttribute;
 use App\Shop\Products\Exceptions\ProductInvalidArgumentException;
 use App\Shop\Products\Exceptions\ProductNotFoundException;
@@ -22,6 +25,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -56,7 +60,7 @@ class ProductController extends Controller
      * @var BrandRepositoryInterface
      */
     private $brandRepo;
-
+private $csvDataRepo;
     /**
      * ProductController constructor.
      *
@@ -68,6 +72,7 @@ class ProductController extends Controller
      * @param BrandRepositoryInterface $brandRepository
      */
     public function __construct(
+        CsvDataRepositoryInterface $csvDataRepository,
         ProductRepositoryInterface $productRepository,
         CategoryRepositoryInterface $categoryRepository,
         AttributeRepositoryInterface $attributeRepository,
@@ -81,6 +86,7 @@ class ProductController extends Controller
         $this->attributeValueRepository = $attributeValueRepository;
         $this->productAttribute = $productAttribute;
         $this->brandRepo = $brandRepository;
+        $this->csvDataRepo=$csvDataRepository;
 
         $this->middleware(['permission:create-product, guard:employee'], ['only' => ['create', 'store']]);
         $this->middleware(['permission:update-product, guard:employee'], ['only' => ['edit', 'update']]);
@@ -385,4 +391,68 @@ class ProductController extends Controller
             return $validator;
         }
     }
+    public function getImport()
+    {
+        return view('admin.products.import');
+    }
+
+    public function parseImport(CsvImportRequest $request)
+    {
+
+        $path = $request->file('csv_file')->getRealPath();
+
+        if ($request->has('header')) {
+            $data = Excel::load($path, function($reader) {})->get()->toArray();
+        } else {
+            $data = array_map('str_getcsv', file($path));
+        }
+
+        if (count($data) > 0) {
+            if ($request->has('header')) {
+                $csv_header_fields = [];
+                foreach ($data[0] as $key => $value) {
+                    $csv_header_fields[] = $key;
+                }
+            }
+            $csv_data = array_slice($data, 0, 2);
+
+            $csv_data_file = CsvData::create([
+                'csv_filename' => $request->file('csv_file')->getClientOriginalName(),
+                'csv_header' => $request->has('header'),
+                'csv_data' => json_encode($data)
+            ]);
+        } else {
+            return redirect()->back();
+        }
+
+        return view('admin.products.import_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'));
+
+    }
+
+    public function processImport(Request $request)
+    {
+        $data = $this->csvDataRepo->find($request->csv_data_file_id);
+        $csv_data = json_decode($data->csv_data, true);
+        foreach ($csv_data as $row) {
+            $product = new Product();
+            foreach (config('app.db_fields') as $index => $field) {
+                if ($data->csv_header) {
+                    $product->$field = $row[$request->fields[$field]];
+                } else {
+                    $product->$field = $row[$request->fields[$index]];
+                }
+            }
+           /* foreach ($product->getFillImport() as $index => $field) {
+                if ($data->csv_header) {
+                    $product->$field = $row[$request->fields[$field]];
+                } else {
+                    $product->$field = $row[$request->fields[$index]];
+                }
+            }*/
+            $product->save();
+        }
+
+        return view('admin.products.import_success');
+    }
+
 }

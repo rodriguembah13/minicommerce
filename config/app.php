@@ -221,5 +221,23 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
-
+    'db_fields' => [
+        'sku',
+        'name',
+        'description',
+        'cover',
+        'quantity',
+        'price',
+        'brand_id',
+        'status',
+        'weight',
+        'mass_unit',
+        'status',
+        'sale_price',
+        'length',
+        'width',
+        'height',
+        'distance_unit',
+        'slug',
+    ]
 ];
