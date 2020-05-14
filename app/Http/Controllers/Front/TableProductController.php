@@ -151,10 +151,16 @@ class TableProductController extends Controller
         $product = $this->productRepo->findProductById($request->get('product_id'));
         $pack=$this->packRepo->findPackById($request->get('pack_id'));
         $inpack=$this->lineRepo->findOneBy(['product_id'=>$product->id,'pack_id'=>$pack->id])->quantity;
+        $horsPack=0;
+        if ($inpack>$quantity){
+            $horsPack=0;
+        }else{
+            $horsPack= $quantity-$inpack;
+        }
         $responseArray[] = [
             'id' => '',
             'message' => 'product to cart',
-            'horsPack' => $quantity-$inpack,
+            'horsPack' => $horsPack,
             'inPack' => $inpack,
             'total' => '',
         ];

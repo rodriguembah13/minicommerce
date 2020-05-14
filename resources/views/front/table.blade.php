@@ -141,7 +141,7 @@
 
                success:function(data){
 
-                   alert(data[0].message);
+                   //alert(data[0].message);
                    $('#hors-pack-'+product_id).text(data[0].horsPack);
                    $('#in-pack-'+product_id).text(data[0].inPack);
                    $(statusok).removeClass('hidden');
@@ -151,9 +151,9 @@
                    $(statusnok).removeClass('hidden');
                    $(statusm).addClass('hidden');
                    //var err = eval("(" + xhr.responseJSON.error + ")");
-                   alert(error);
+                 /*  alert(error);
                    console.log("Error: ", xhr.responseJSON.error);
-                   console.log("Errors->", error);
+                   console.log("Errors->", error);*/
                }
            });
        }
@@ -169,12 +169,10 @@
             $.ajax({
                 type:'POST',
                 url:'/ajaxRequestGetTable',
-
                 data:{quantity:$(qte).val(), product_id:id,pack_id:$('#itemValue').text(),_token: _token},
-
                 success:function(data){
 
-                    alert(data[0].message);
+                    //alert(data[0].message);
                     $('#hors-pack-'+id).text(data[0].horsPack);
                     $('#in-pack-'+id).text(data[0].inPack);
                     $(statusok).removeClass('hidden');
@@ -183,10 +181,12 @@
                 ,error: function(xhr, status, error) {
                    $(statusnok).removeClass('hidden');
                     $(statusm).addClass('hidden');
+                    $('#hors-pack-'+id).text("0");
+                    $('#in-pack-'+id).text(0);
                     //var err = eval("(" + xhr.responseJSON.error + ")");
-                    alert(error);
+                    /*alert(error);
                     console.log("Error: ", xhr.responseJSON.error);
-                    console.log("Errors->", error);
+                    console.log("Errors->", error);*/
                 }
             });
         }
