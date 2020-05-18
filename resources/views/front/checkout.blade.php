@@ -162,7 +162,7 @@
             $('.courier_id').val(courierId);
         }
 
-        $(document).ready(function () {
+       // $(document).ready(function () {
 
             let clicked = false;
 
@@ -207,6 +207,6 @@
                 setCourierDetails(courierId);
                 setTotal(total, shippingCost);
             }
-        });
+        //});
     </script>
 @endsection

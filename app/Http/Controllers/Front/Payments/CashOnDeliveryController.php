@@ -1,6 +1,8 @@
 <?php
 
+
 namespace App\Http\Controllers\Front\Payments;
+
 
 use App\Http\Controllers\Controller;
 use App\Shop\Carts\Repositories\Interfaces\CartRepositoryInterface;
@@ -13,10 +15,8 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
-use Shippo_Shipment;
-use Shippo_Transaction;
 
-class BankTransferController extends Controller
+class CashOnDeliveryController extends Controller
 {
     /**
      * @var CartRepositoryInterface
@@ -37,7 +37,7 @@ class BankTransferController extends Controller
     private $carrier;
 
     /**
-     * BankTransferController constructor.
+     * CashController constructor.
      *
      * @param Request $request
      * @param CartRepositoryInterface $cartRepository
@@ -76,7 +76,6 @@ class BankTransferController extends Controller
         $this->shipmentObjId = $shipmentObjId;
         $this->billingAddress = $billingAddress;
     }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

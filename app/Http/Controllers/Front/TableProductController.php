@@ -62,14 +62,11 @@ class TableProductController extends Controller
         ]);
     }
     /**
+ * Create a new controller instance.
+ *
 
-     * Create a new controller instance.
-
-     *
-
-     * @return void
-
-     */
+     * @return \Illuminate\Http\JsonResponse
+ */
 
     public function ajaxRequestPost(Request $request)
 
@@ -83,10 +80,10 @@ class TableProductController extends Controller
         foreach ($lines as $linePack){
             $existing[]=$linePack->product_id;
         }
-        if (!in_array($product->id,$existing)){
+       /* if (!in_array($product->id,$existing)){
             return response()->json(['error'=>'no in pack'.$existing[0]], 404);
-        }
-        $inpack=$this->lineRepo->findOneBy(['product_id'=>$product->id,'pack_id'=>$pack->id])->quantity;
+        }*/
+        //$inpack=$this->lineRepo->findOneBy(['product_id'=>$product->id,'pack_id'=>$pack->id])->quantity;
        /* if ($this->lineRepo->findOneBy(['product_id'=>$product->id,'pack_id'=>$pack->id])->quantity > $quantity){
             return response()->json(['error'=>'quantity error'.$existing[0]], 404);
         }*/
@@ -117,8 +114,8 @@ class TableProductController extends Controller
         $responseArray[] = [
             'id' => '',
             'message' => 'product to cart',
-            'horsPack' => $quantity-$inpack,
-            'inPack' => $inpack,
+           /* 'horsPack' => $quantity-$inpack,
+            'inPack' => $inpack,*/
             'total' => '',
         ];
         return response()->json($responseArray);
