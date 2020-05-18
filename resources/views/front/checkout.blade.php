@@ -109,6 +109,26 @@
                                 </div>
                             </div> <br>
                         @endif
+                    <div class="row">
+                        <div class="col-md-12">
+                        <legend><i class="fa fa-clock-o"></i>Retrait/Livraison</legend>
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='dateRetrait'>
+                                            <input type='text' class="form-control" name="date_retrait"/>
+                                            <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="dateLivraison" class="input-group date">
+                                    <input id="dateLivraison1" name="date_livraison" type="text" class="form-control"><span class="input-group-addon"><i class="fa fa-th-list"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <legend><i class="fa fa-credit-card"></i> Payment</legend>
@@ -146,7 +166,31 @@
 @endsection
 @section('js')
     <script type="text/javascript">
-
+        $('#dateLivraison').datepicker({
+            todayBtn: true,
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true,
+            beforeShowMonth: function(date){
+                if (date.getMonth() == 8) {
+                    return false;
+                }
+            },
+            defaultViewDate: { year: 2020, month: 04, day: 25 }
+        });
+        $('#dateRetrait').datepicker({
+            todayBtn: true,
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true,
+            beforeShowMonth: function(date){
+                if (date.getMonth() == 8) {
+                    return false;
+                }
+            },
+            defaultViewDate: { year: 2020, month: 04, day: 25 }
+        });
+        //$('#datetimepicker1').datetimepicker();
         function setTotal(total, shippingCost) {
             let computed = +shippingCost + parseFloat(total);
             $('#total').html(computed.toFixed(2));
@@ -162,7 +206,7 @@
             $('.courier_id').val(courierId);
         }
 
-       // $(document).ready(function () {
+        $(document).ready(function () {
 
             let clicked = false;
 
@@ -207,6 +251,6 @@
                 setCourierDetails(courierId);
                 setTotal(total, shippingCost);
             }
-        //});
+        });
     </script>
 @endsection

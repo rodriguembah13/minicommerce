@@ -46,8 +46,8 @@
     @yield('css')
     <meta property="og:url" content="{{ request()->url() }}"/>
     @yield('og')
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
-    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>-->
+     {{--jQuery (necessary for Bootstrap's JavaScript plugins)--}}
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>
 </head>
 <body>
 <noscript>

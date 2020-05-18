@@ -109,8 +109,8 @@ class BankTransferController extends Controller
             'reference' => Uuid::uuid4()->toString(),
             'courier_id' => 1, // @deprecated
             'customer_id' => $request->user()->id,
-            //'address_id' => $request->input('billing_address'),
-            'address_id' => 4,
+            'address_id' => $request->input('billing_address'),
+            //'address_id' => 4,
             'order_status_id' => $os->id,
             'payment' => strtolower(config('bank-transfer.name')),
             'discounts' => 0,

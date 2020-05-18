@@ -105,6 +105,9 @@ Route::namespace('Front')->group(function () {
         Route::namespace('Payments')->group(function () {
             Route::get('bank-transfer', 'BankTransferController@index')->name('bank-transfer.index');
             Route::post('bank-transfer', 'BankTransferController@store')->name('bank-transfer.store');
+            Route::get('cash-on-delivery', 'CashOnDeliveryController@index')->name('cash-on-delivery.index');
+            Route::post('cash-on-delivery', 'CashOnDeliveryController@store')->name('cash-on-delivery.store');
+
         });
 
         Route::namespace('Addresses')->group(function () {

@@ -47,6 +47,7 @@ mix
             'node_modules/aos/dist/aos.css',
             'resources/assets/css/jquery.fancybox.min.css',
             'resources/assets/css/owl.theme.default.min.css',
+            'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
         ],
         'public/css/style.min.css'
     )
@@ -68,6 +69,7 @@ mix
             'node_modules/owl.carousel/dist/owl.carousel.js',
             'node_modules/aos/dist/aos.js',
             'resources/assets/js/jquery.stellar.min.js',
+            'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         ],
         'public/js/front.min.js'
     )

@@ -35,6 +35,8 @@ class CashOnDeliveryController extends Controller
     private $billingAddress;
 
     private $carrier;
+    private $dateRetrait;
+    private $dateLivraison;
 
     /**
      * CashController constructor.
@@ -54,7 +56,8 @@ class CashOnDeliveryController extends Controller
         $rateObjId = null;
         $shipmentObjId = null;
         $billingAddress = $request->input('billing_address');
-
+        $this->dateLivraison=$request->input('date_livraison');
+        $this->dateRetrait=$request->input('date_retrait');
         if ($request->has('rate')) {
             if ($request->input('rate') != '') {
 
@@ -81,14 +84,15 @@ class CashOnDeliveryController extends Controller
      */
     public function index()
     {
-        return view('front.bank-transfer-redirect', [
+        return view('front.cash-on-delivery-redirect', [
             'subtotal' => $this->cartRepo->getSubTotal(),
             'shipping' => $this->shippingFee,
             'tax' => $this->cartRepo->getTax(),
             'total' => $this->cartRepo->getTotal(2, $this->shippingFee),
             'rateObjectId' => $this->rateObjectId,
             'shipmentObjId' => $this->shipmentObjId,
-            'billingAddress' => $this->billingAddress
+            'billingAddress' => $this->billingAddress,
+            'dateLivrason'=>$this->dateLivraison,
         ]);
     }
 
@@ -108,10 +112,10 @@ class CashOnDeliveryController extends Controller
             'reference' => Uuid::uuid4()->toString(),
             'courier_id' => 1, // @deprecated
             'customer_id' => $request->user()->id,
-            //'address_id' => $request->input('billing_address'),
-            'address_id' => 4,
+            'address_id' => $request->input('billing_address'),
+            //'address_id' => 4,
             'order_status_id' => $os->id,
-            'payment' => strtolower(config('bank-transfer.name')),
+            'payment' => strtolower(config('cash-on-delivery.name')),
             'discounts' => 0,
             'total_products' => $this->cartRepo->getSubTotal(),
             'total' => $this->cartRepo->getTotal(2, $this->shippingFee),

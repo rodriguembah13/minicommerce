@@ -21,7 +21,6 @@
     </td>
 
 </tr>
-{{--
 <script type="text/javascript">
     $(document).ready(function () {
         let billingAddressId = $('input[name="billing_address"]:checked').val();
@@ -37,4 +36,4 @@
             $('.rate').val($(this).val())
         });
     });
-</script>--}}
+</script>
