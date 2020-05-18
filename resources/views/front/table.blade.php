@@ -5,11 +5,14 @@
 
     </section>
     <br>
+{{--    @if(session()->has('pack'))
+        {{ $pack }}
+    @endif--}}
     <div class="container" id="articles">
         <div class="row">
         <h2>Packs:{{$pack->name}}</h2>
-        <div class="card">
-            <div class="card-body">
+        <div class="panel">
+            <div class="panel-body">
         @foreach($pack->linePacks as $line)
                     <span class="label label-info">Product: {{$line->product->name}}</span><span class="label label-success">Quantity:{{$line->quantity}}</span>
 

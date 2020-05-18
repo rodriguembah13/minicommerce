@@ -11,6 +11,7 @@ use App\Shop\ProductAttributes\Repositories\ProductAttributeRepositoryInterface;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Shop\Products\Transformations\ProductTransformable;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class TableProductController extends Controller
 {
@@ -48,15 +49,15 @@ class TableProductController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(int $id)
+    public function index(Request $request,int $id)
     {
         $cat1 = $this->categoryRepo->findCategoryById(2);
         $cat2 = $this->categoryRepo->findCategoryById(3);
         $pack=$this->packRepo->findPackById($id);
         //$line=$this->lineRepo->findBy(['']);
-
+        $request->session()->put('pack', $pack);
         return view('front.table', [
-            'products' => $this->productRepo->listProducts(),
+            'products' => $this->productRepo->listProducts()->where('status', 1),
             'pack'=>$pack,
         ]);
     }
