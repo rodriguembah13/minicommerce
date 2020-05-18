@@ -341,8 +341,8 @@
                 sendAjaxPost(cookieItem[0],cookieItem[1]);
             }
             //delete cookie on computer
-            document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            //window.location.replace("/cart");
+           // document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+           // window.location.replace("/cart");
         }
         function getCookieValueByRegEx(a, b) {
             b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
