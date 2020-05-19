@@ -97,6 +97,7 @@ class OrderController extends Controller
             'customer' => $this->customerRepo->findCustomerById($order->customer_id),
             'currentStatus' => $this->orderStatusRepo->findOrderStatusById($order->order_status_id),
             'payment' => $order->payment,
+            'pack'=>$order->pack(),
             'user' => auth()->guard('employee')->user()
         ]);
     }
@@ -122,6 +123,7 @@ class OrderController extends Controller
             'customer' => $this->customerRepo->findCustomerById($order->customer_id),
             'currentStatus' => $this->orderStatusRepo->findOrderStatusById($order->order_status_id),
             'payment' => $order->payment,
+            'pack'=>$order->pack(),
             'user' => auth()->guard('employee')->user()
         ]);
     }
@@ -165,7 +167,8 @@ class OrderController extends Controller
             'courier' => $order->courier,
             'address' => $this->transformAddress($order->address),
             'status' => $order->orderStatus,
-            'payment' => $order->paymentMethod
+            'payment' => $order->paymentMethod,
+            'pack'=>$order->pack(),
         ];
 
         $pdf = app()->make('dompdf.wrapper');

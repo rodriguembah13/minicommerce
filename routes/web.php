@@ -127,7 +127,7 @@ Route::namespace('Front')->group(function () {
         Route::get('checkout/cancel', 'CheckoutController@cancel')->name('checkout.cancel');
         Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
         Route::resource('customer.address', 'CustomerAddressController');
-        Route::get('checkout_table', 'CheckoutController@index')->name('checkout_table.index');
+        Route::get('checkout_table', 'CheckoutTableController@index')->name('checkout_table.index');
         Route::post('checkout_table', 'CheckoutTableController@store')->name('checkout_table.store');
         Route::get('checkout_table/execute', 'CheckoutTableController@executePayPalPayment')->name('checkout_table.execute');
         Route::post('checkout_table/execute', 'CheckoutTableController@charge')->name('checkout_table.execute');

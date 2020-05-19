@@ -19,13 +19,16 @@ use App\Shop\PaymentMethods\Paypal\Exceptions\PaypalRequestError;
 use App\Shop\PaymentMethods\Paypal\Repositories\PayPalExpressCheckoutRepository;
 use App\Shop\PaymentMethods\Stripe\Exceptions\StripeChargingErrorException;
 use App\Shop\PaymentMethods\Stripe\StripeRepository;
+use App\Shop\Products\Product;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
+use App\Shop\Products\Repositories\ProductRepository;
 use App\Shop\Products\Transformations\ProductTransformable;
 use App\Shop\Shipping\ShippingInterface;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use PayPal\Exception\PayPalConnectionException;
 
@@ -72,7 +75,7 @@ class CheckoutTableController extends Controller
      * @var ShippingInterface
      */
     private $shippingRepo;
-
+private $collection;
     public function __construct(
         CartRepositoryInterface $cartRepository,
         CourierRepositoryInterface $courierRepository,
@@ -91,6 +94,7 @@ class CheckoutTableController extends Controller
         $this->orderRepo = $orderRepository;
         $this->payPal = new PayPalExpressCheckoutRepository;
         $this->shippingRepo = $shipping;
+        $this->collection=new Collection();
     }
 
     /**
@@ -102,6 +106,24 @@ class CheckoutTableController extends Controller
      */
     public function index(Request $request)
     {
+        $this->cartRepo->clearCart();
+        $cookie = Cookie::get('cart');
+        $values=explode('-', $cookie) ;
+        $product_array=[];
+        for ( $i = 0; $i < sizeof($values); $i++) {
+        $cookieItem = explode(',',$values[$i]);
+        //$product_array[]=$this->productRepo->find($cookieItem[0]);
+        array_push($product_array,$this->productRepo->find($cookieItem[0]));
+        $this->cartRepo->addToCart($this->productRepo->find($cookieItem[0]),$cookieItem[1]);
+        // 0 = id; 1 = quantity
+    }
+        /*$collection = collect($product_array)->map(function ($name) {
+            return strtoupper($name);
+        })
+            ->reject(function ($name) {
+                return empty($name);
+            });*/
+        $this->collection = collect($product_array);
         $products = $this->cartRepo->getCartItems();
         $customer = $request->user();
         $rates = null;
@@ -122,18 +144,19 @@ class CheckoutTableController extends Controller
 
         $billingAddress = $customer->addresses()->first();
 
-        return view('front.checkout', [
+        return view('front.checkout-table', [
             'customer' => $customer,
             'billingAddress' => $billingAddress,
             'addresses' => $customer->addresses()->get(),
-            'products' => $this->cartRepo->getCartItems(),
+            'products' => $products = $this->cartRepo->getCartItems(),
             'subtotal' => $this->cartRepo->getSubTotal(),
             'tax' => $this->cartRepo->getTax(),
             'total' => $this->cartRepo->getTotal(2),
             'payments' => $paymentGateways,
             'cartItems' => $this->cartRepo->getCartItemsTransformed(),
             'shipment_object_id' => $shipment_object_id,
-            'rates' => $rates
+            'rates' => $rates,
+            'cookies'=>$products,
         ]);
     }
 
@@ -252,5 +275,19 @@ class CheckoutTableController extends Controller
 
             return $this->shippingRepo->readyShipment();
         }
+    }
+    /**
+     * @return Collection
+     */
+    public function getCartItemsTransformed() : Collection
+    {
+        return $this->collection->map(function ($item) {
+            $productRepo = new ProductRepository(new Product());
+            $product = $productRepo->findProductById($item->id);
+            $item->product = $product;
+            $item->cover = $product->cover;
+            $item->description = $product->description;
+            return $item;
+        });
     }
 }

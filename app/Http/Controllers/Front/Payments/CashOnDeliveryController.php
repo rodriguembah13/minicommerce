@@ -11,8 +11,10 @@ use App\Shop\Orders\Repositories\OrderRepository;
 use App\Shop\OrderStatuses\OrderStatus;
 use App\Shop\OrderStatuses\Repositories\OrderStatusRepository;
 use App\Shop\Shipping\ShippingInterface;
+use DateTime;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
 
@@ -37,6 +39,7 @@ class CashOnDeliveryController extends Controller
     private $carrier;
     private $dateRetrait;
     private $dateLivraison;
+    private $packId;
 
     /**
      * CashController constructor.
@@ -58,6 +61,7 @@ class CashOnDeliveryController extends Controller
         $billingAddress = $request->input('billing_address');
         $this->dateLivraison=$request->input('date_livraison');
         $this->dateRetrait=$request->input('date_retrait');
+        $this->packId=Cookie::get('pack_id');
         if ($request->has('rate')) {
             if ($request->input('rate') != '') {
 
@@ -93,6 +97,8 @@ class CashOnDeliveryController extends Controller
             'shipmentObjId' => $this->shipmentObjId,
             'billingAddress' => $this->billingAddress,
             'dateLivrason'=>$this->dateLivraison,
+            'dateRetrait'=>$this->dateRetrait,
+            'pack_id'=>$this->packId,
         ]);
     }
 
@@ -107,7 +113,8 @@ class CashOnDeliveryController extends Controller
         $checkoutRepo = new CheckoutRepository;
         $orderStatusRepo = new OrderStatusRepository(new OrderStatus);
         $os = $orderStatusRepo->findByName('encours');
-
+        $date = new DateTime($request->input('date_retrait'));
+        $dateLivraison = new DateTime($request->input('date_livraison'));
         $order = $checkoutRepo->buildCheckoutItems([
             'reference' => Uuid::uuid4()->toString(),
             'courier_id' => 1, // @deprecated
@@ -121,7 +128,10 @@ class CashOnDeliveryController extends Controller
             'total' => $this->cartRepo->getTotal(2, $this->shippingFee),
             'total_shipping' => $this->shippingFee,
             'total_paid' => 0,
-            'tax' => $this->cartRepo->getTax()
+            'tax' => $this->cartRepo->getTax(),
+            'date_livraison'=>$dateLivraison,
+            'date_retrait'=>$date,
+            'pack_id'=>Cookie::get('pack_id'),
         ]);
 
         if (env('ACTIVATE_SHIPPING') == 1) {
@@ -153,6 +163,8 @@ class CashOnDeliveryController extends Controller
         }
 
         Cart::destroy();
+        Cookie::queue(Cookie::forget('cart'));
+        Cookie::queue(Cookie::forget('pack_id'));
 
         return redirect()->route('accounts', ['tab' => 'orders'])->with('message', 'Order successful!');
     }

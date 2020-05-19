@@ -31,7 +31,10 @@ class CheckoutRepository
             'total' => $data['total'],
             'total_paid' => $data['total_paid'],
             'total_shipping' => isset($data['total_shipping']) ? $data['total_shipping'] : 0,
-            'tax' => $data['tax']
+            'tax' => $data['tax'],
+            'date_livraison'=>$data['date_livraison'],
+            'date_retrait'=>$data['date_retrait'],
+            'pack_id'=>$data['pack_id'],
         ]);
 
         return $order;

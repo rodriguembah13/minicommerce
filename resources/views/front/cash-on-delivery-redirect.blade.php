@@ -9,7 +9,7 @@
                     <li class="active">Shopping Cart</li>
                 </ol>
             </div>
-            <p>{{ $dateLivrason }}</p>
+           {{-- <p>{{ $pack_id }}</p>--}}
             <div class="col-md-12">
                 <form action="{{ route('cash-on-delivery.store') }}" class="form-horizontal" method="post">
                     {{ csrf_field() }}
@@ -39,6 +39,8 @@
                                 <input type="hidden" id="billing_address" name="billing_address" value="{{ $billingAddress }}">
                                 <input type="hidden" name="shipment_obj_id" value="{{ $shipmentObjId }}">
                                 <input type="hidden" name="rate" value="{{ $rateObjectId }}">
+                                <input type="hidden" name="date_livraison" value="{{ $dateLivrason }}">
+                                <input type="hidden" name="date_retrait" value="{{ $dateRetrait }}">
                                 @if(request()->has('courier'))
                                     <input type="hidden" name="courier" value="{{ request()->input('courier') }}">
                                 @endif

@@ -27,10 +27,13 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <td class="col-md-3">Date</td>
-                            <td class="col-md-3">Customer</td>
-                            <td class="col-md-3">Payment</td>
-                            <td class="col-md-3">Status</td>
+                            <td class="col">Date</td>
+                            <td class="col">Customer</td>
+                            <td class="col">Payment</td>
+                            <td class="col">Pack</td>
+                            <td class="col">Retrait</td>
+                            <td class="col">Livraison</td>
+                            <td class="col">Status</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,38 +41,41 @@
                         <td>{{ date('M d, Y h:i a', strtotime($order['created_at'])) }}</td>
                         <td><a href="{{ route('admin.customers.show', $customer->id) }}">{{ $customer->name }}</a></td>
                         <td><strong>{{ $order['payment'] }}</strong></td>
+                        <td><strong>{{ $order['pack']->name }}</strong></td>
+                        <td>{{ $order['date_retrait'] }}</td>
+                        <td>{{ $order['date_livraison'] }}</td>
                         <td><button type="button" class="btn btn-info btn-block">{{ $currentStatus->name }}</button></td>
                     </tr>
                     </tbody>
                     <tbody>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td><td></td>
                         <td class="bg-warning">Subtotal</td>
                         <td class="bg-warning">{{ $order['total_products'] }}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td><td></td>
                         <td class="bg-warning">Tax</td>
                         <td class="bg-warning">{{ $order['tax'] }}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td><td></td>
                         <td class="bg-warning">Discount</td>
                         <td class="bg-warning">{{ $order['discounts'] }}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td><td></td>
                         <td class="bg-success text-bold">Order Total</td>
                         <td class="bg-success text-bold">{{ $order['total'] }}</td>
                     </tr>
                     @if($order['total_paid'] != $order['total'])
                         <tr>
                             <td></td>
-                            <td></td>
+                            <td></td><td></td><td></td><td></td>
                             <td class="bg-danger text-bold">Total paid</td>
                             <td class="bg-danger text-bold">{{ $order['total_paid'] }}</td>
                         </tr>

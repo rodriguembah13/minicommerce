@@ -1,6 +1,7 @@
 @extends('layouts.front.app')
 
 @section('content')
+
     <div class="container product-in-cart-list">
         @if(!$products->isEmpty())
             <div class="row">
@@ -10,6 +11,7 @@
                         <li class="active">Shopping Cart</li>
                     </ol>
                 </div>
+
                 <div class="col-md-12 content">
                     <div class="box-body">
                         @include('layouts.errors-and-messages')

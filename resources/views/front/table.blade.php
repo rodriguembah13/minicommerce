@@ -179,7 +179,7 @@
            $.ajax({
                type:'POST',
                url:'/ajaxRequestTable',
-
+               async: "false",
                data:{quantity:quantity, product_id:product_id,pack_id:$('#itemValue').text(),_token: _token},
 
                success:function(data){
@@ -287,7 +287,7 @@
             else cartMonitorObj.style.display = 'inline-block';*/
             var now = new Date();
             now.setTime(now.getTime() + 30 * 24 * 3600 * 1000);
-            document.cookie = 'cart=' + cart.join('-') + '; expires=' + now.toUTCString() + '; path=/'
+            document.cookie = 'cart=' + cart.join('-') + '; expires=' + now.toUTCString() + '; path=/';
         }
         function addArticle(articleId) {
             setInCart(articleId,$('#quantity-'+articleId).val());
@@ -337,11 +337,14 @@
         function sendCookieToServer() {
             var cartCookie = getCookieValueByRegEx('cart');
             var cookieItems = cartCookie.split('-');
+            var now = new Date();
+            now.setTime(now.getTime() + 30 * 24 * 3600 * 1000);
+            document.cookie = 'pack_id=' + $('#itemValue').text() + '; expires=' + now.toUTCString() + '; path=/';
             for (var i = 0; i < cookieItems.length; i++) {
                 var cookieItem = cookieItems[i].split(',');
                 // 0 = id; 1 = quantity
                // setInCart(cookieItem[0],cookieItem[1]);
-               // sendAjaxPost(cookieItem[0],cookieItem[1]);
+                sendAjaxPost(cookieItem[0],cookieItem[1]);
             }
             //delete cookie on computer
            // document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";

@@ -6,6 +6,7 @@ use App\Shop\Addresses\Address;
 use App\Shop\Couriers\Courier;
 use App\Shop\Customers\Customer;
 use App\Shop\OrderStatuses\OrderStatus;
+use App\Shop\Packs\Pack;
 use App\Shop\Products\Product;
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -58,7 +59,10 @@ class Order extends Model
         'invoice',
         'label_url',
         'tracking_number',
-        'total_shipping'
+        'total_shipping',
+        'date_retrait',
+        'date_livraison',
+        'pack_id'
     ];
 
     /**
@@ -91,7 +95,13 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class);
     }
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pack()
+    {
+        return $this->belongsTo(Pack::class);
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
