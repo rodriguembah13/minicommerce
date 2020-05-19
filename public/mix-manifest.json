@@ -4,5 +4,6 @@
     "/css/style.min.css": "/css/style.min.css",
     "/js/front.min.js": "/js/front.min.js",
     "/js/scripts.js": "/js/scripts.js",
-    "/js/custom.js": "/js/custom.js"
+    "/js/custom.js": "/js/custom.js",
+    "/js/jquery.min.js": "/js/jquery.min.js"
 }

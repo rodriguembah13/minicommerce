@@ -240,3 +240,8 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
                 </div>
             </div>
 @endsection
+@section('js')
+    <script type="text/javascript">
+        $('#apropos').addClass('active');
+    </script>
+@endsection

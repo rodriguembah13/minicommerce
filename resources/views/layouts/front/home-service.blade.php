@@ -712,6 +712,6 @@
 @endsection
 @section('js')
     <script type="text/javascript">
-
+        $('#home').addClass('active');
     </script>
 @endsection

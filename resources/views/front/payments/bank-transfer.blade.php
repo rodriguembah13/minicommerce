@@ -22,7 +22,7 @@
 
 </tr>
 <script type="text/javascript">
-    $(document).ready(function () {
+    /*$(document).ready(function () {
         let billingAddressId = $('input[name="billing_address"]:checked').val();
         $('.billing_address').val(billingAddressId);
 
@@ -35,5 +35,5 @@
         courierRadioBtn.click(function () {
             $('.rate').val($(this).val())
         });
-    });
+    });*/
 </script>

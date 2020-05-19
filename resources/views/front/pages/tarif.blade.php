@@ -1,28 +1,22 @@
 @extends('layouts.front.app')
-<meta name="csrf-token" content="{{ csrf_token() }}" />
+
+@section('og')
+    <meta property="og:type" content="blog"/>
+    <meta property="og:title" content="{{ config('app.name') }}"/>
+    <meta property="og:description" content="{{ config('app.name') }}"/>
+@endsection
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('content')
+    @include('front.pages.tarif-slider')
     <section class="et_pb_top_inside_divider">
 
     </section>
     <br>
-{{--    @if(session()->has('pack'))
-        {{ $pack }}
-    @endif--}}
+    {{--    @if(session()->has('pack'))
+            {{ $pack }}
+        @endif--}}
     <div class="container" id="articles">
-        <div class="row">
-        <h2>Packs:{{$pack->name}}</h2>
-        <div class="panel">
-            <div class="panel-body">
-        @foreach($pack->linePacks as $line)
-                    <span class="label label-info">Product: {{$line->product->name}}</span><span class="label label-success">Quantity:{{$line->quantity}}</span>
 
-        @endforeach
-            </div>
-        </div>
-            <div class="col-md-4">
-
-            </div>
-        </div>
         <hr>
         <div id="cart"></div>
         <table class="table table-bordered table-responsive">
@@ -33,41 +27,33 @@
                 <th scope="col">Prix</th>
                 <th scope="col">Quantite</th>
                 <th scope="col">Action</th>
-                <th scope="col">Etat</th>
-                <th scope="col">Inclus dans le pack</th>
-                <th scope="col">Hors pack</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($products as $product)
-            <tr id="product-{{$product->id}}">
-                <th scope="row">{{$product->id}}</th>
-                <td id="product-name-{{$product->id}}">{{$product->name}}</td>
-                <td id="product-price-{{$product->id}}">{{--{{ config('cart.currency') }} --}}{{$product->price}}</td>
+                <tr id="product-{{$product->id}}">
+                    <th scope="row">{{$product->id}}</th>
+                    <td id="product-name-{{$product->id}}">{{$product->name}}</td>
+                    <td id="product-price-{{$product->id}}">{{--{{ config('cart.currency') }} --}}{{$product->price}}</td>
 
-                <td><input  id="quantity-{{$product->id}}" name="name-{{$product->id}}" type="number" class="form-control" value="0" step="1" min="0">
-                    {{--<div class="input-group spinner">
-                        <input type="text" class="form-control" value="0">
-                        <div class="input-group-btn-vertical">
-                            <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                            <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
-                        </div></div>--}}
-                </td>
-                <td><div class="btn-group-xs" role="group" aria-label="Basic example" style="display: ruby">
-                        <button type="button" class="btn btn-success btn-sm" id="add-to-cart-table" onclick="addArticle({{$product->id}})">add</button>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="removeArticle({{$product->id}})">Del</button>
-                    </div></td>
-                <td><span id="etat-ok-{{$product->id}}" class="bg-success hidden"><i class="fa fa-check-square bg-success"></i></span>
-                    <span id="etat-nok-{{$product->id}}" class="bg-danger hidden"><i class="fa fa-times-circle"></i></span>
-                    <span id="etat-m-{{$product->id}}" class="bg-warning "><i class="fa fa-minus-square"></i></span>
-                </td>
-                <td><span id="in-pack-{{$product->id}}"></span></td>
-                <td><span id="hors-pack-{{$product->id}}"></span></td>
-            </tr>
+                    <td><input  id="quantity-{{$product->id}}" name="name-{{$product->id}}" type="number" class="form-control" value="0" step="1" min="0">
+                        {{--<div class="input-group spinner">
+                            <input type="text" class="form-control" value="0">
+                            <div class="input-group-btn-vertical">
+                                <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                                <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                            </div></div>--}}
+                    </td>
+                    <td><div class="btn-group-xs" role="group" aria-label="Basic example" style="display: ruby">
+                            <button type="button" class="btn btn-success btn-sm" id="add-to-cart-table" onclick="addArticle({{$product->id}})">add</button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="removeArticle({{$product->id}})">Del</button>
+                        </div></td>
+
+                </tr>
             @endforeach
             </tbody>
         </table>
-        <span class="hidden" id="itemValue">{{$pack->id}}</span>
+
     </div>
     <div class="cartfixed" id="cart1">
         <p>Produit</p>
@@ -158,6 +144,7 @@
 @endsection
 @section('js')
     <script type="text/javascript">
+        $('#tarif').addClass('active');
         $('.spinner .btn:first-of-type').on('click', function() {
 
             $('.spinner input').val( parseInt($('.spinner input').val(), 10) + 1);
@@ -167,39 +154,39 @@
                 $('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
             }
         });
-       /* $('#add-to-cart-table').click(function () {
-            alert($('#itemValue').text())
-        });*/
-       function sendAjaxPost(product_id, quantity) {
-           var _token   = $('meta[name="csrf-token"]').attr('content');
-           var statusok="#etat-ok-"+product_id;
-           var statusm="#etat-m-"+product_id;
-           var statusnok="#etat-nok-"+product_id;
-           var inpack="#in-pack-"+product_id;
-           $.ajax({
-               type:'POST',
-               url:'/ajaxRequestTable',
+        /* $('#add-to-cart-table').click(function () {
+             alert($('#itemValue').text())
+         });*/
+        function sendAjaxPost(product_id, quantity) {
+            var _token   = $('meta[name="csrf-token"]').attr('content');
+            var statusok="#etat-ok-"+product_id;
+            var statusm="#etat-m-"+product_id;
+            var statusnok="#etat-nok-"+product_id;
+            var inpack="#in-pack-"+product_id;
+            $.ajax({
+                type:'POST',
+                url:'/ajaxRequestTable',
 
-               data:{quantity:quantity, product_id:product_id,pack_id:$('#itemValue').text(),_token: _token},
+                data:{quantity:quantity, product_id:product_id,pack_id:$('#itemValue').text(),_token: _token},
 
-               success:function(data){
+                success:function(data){
 
-                   //alert(data[0].message);
-                   $('#hors-pack-'+product_id).text(data[0].horsPack);
-                   $('#in-pack-'+product_id).text(data[0].inPack);
-                   $(statusok).removeClass('hidden');
-                   $(statusm).addClass('hidden');
-               }
-               ,error: function(xhr, status, error) {
-                   $(statusnok).removeClass('hidden');
-                   $(statusm).addClass('hidden');
-                   //var err = eval("(" + xhr.responseJSON.error + ")");
-                 /*  alert(error);
-                   console.log("Error: ", xhr.responseJSON.error);
-                   console.log("Errors->", error);*/
-               }
-           });
-       }
+                    //alert(data[0].message);
+                    $('#hors-pack-'+product_id).text(data[0].horsPack);
+                    $('#in-pack-'+product_id).text(data[0].inPack);
+                    $(statusok).removeClass('hidden');
+                    $(statusm).addClass('hidden');
+                }
+                ,error: function(xhr, status, error) {
+                    $(statusnok).removeClass('hidden');
+                    $(statusm).addClass('hidden');
+                    //var err = eval("(" + xhr.responseJSON.error + ")");
+                    /*  alert(error);
+                      console.log("Error: ", xhr.responseJSON.error);
+                      console.log("Errors->", error);*/
+                }
+            });
+        }
         function getItem(id) {
             $('#itemValue').text();
             var qte="#quantity-"+id;
@@ -208,7 +195,7 @@
             var statusnok="#etat-nok-"+id;
             var inpack="#in-pack-"+id;
             var _token   = $('meta[name="csrf-token"]').attr('content');
-           // alert($(qte).val());
+            // alert($(qte).val());
             $.ajax({
                 type:'POST',
                 url:'/ajaxRequestGetTable',
@@ -222,7 +209,7 @@
                     $(statusm).addClass('hidden');
                 }
                 ,error: function(xhr, status, error) {
-                   $(statusnok).removeClass('hidden');
+                    $(statusnok).removeClass('hidden');
                     $(statusm).addClass('hidden');
                     $('#hors-pack-'+id).text("0");
                     $('#in-pack-'+id).text(0);
@@ -262,7 +249,7 @@
                 }
             });
         }
-      /*cart js*/
+        /*cart js*/
         function checkCart() {
             cart = new Array();
             itemsMonitorStr = '';
@@ -291,7 +278,7 @@
         }
         function addArticle(articleId) {
             setInCart(articleId,$('#quantity-'+articleId).val());
-           getItem(articleId);
+            getItem(articleId);
             checkCart();
         }
         function removeArticle(articleId) {
@@ -322,7 +309,7 @@
             if (article[4] === 0) articleQuantityObj.className = '';
             else articleQuantityObj.className = 'added';
             articleQuantityObj.innerHTML = article[4];
-           // alert('testqua'+article[4])
+            // alert('testqua'+article[4])
         }
         function loadCartFromCookie() {
             var cartCookie = getCookieValueByRegEx('cart');
@@ -340,11 +327,11 @@
             for (var i = 0; i < cookieItems.length; i++) {
                 var cookieItem = cookieItems[i].split(',');
                 // 0 = id; 1 = quantity
-               // setInCart(cookieItem[0],cookieItem[1]);
-               // sendAjaxPost(cookieItem[0],cookieItem[1]);
+                // setInCart(cookieItem[0],cookieItem[1]);
+                // sendAjaxPost(cookieItem[0],cookieItem[1]);
             }
             //delete cookie on computer
-           // document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            // document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             window.location.replace("/checkout_table");
         }
         function getCookieValueByRegEx(a, b) {
@@ -355,9 +342,9 @@
             articlesInCart = [];
             cartMonitorObj = document.getElementById('cart1');
             //if (location.hash == '#articles') {
-                //$('#articles').show();
-                //$('#commander-button').hide();
-           // }
+            //$('#articles').show();
+            //$('#commander-button').hide();
+            // }
             if (getCookieValueByRegEx('cart')) {
                 loadCartFromCookie();
             }

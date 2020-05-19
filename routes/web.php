@@ -100,6 +100,10 @@ Route::namespace('Front')->group(function () {
         'as' => 'post_contact_path',
         'uses' => 'ContactController@store'
     ]);
+    Route::get('/tarif', [
+        'as' => 'tarif_path',
+        'uses' => 'HomeController@tarif'
+    ]);
     Route::group(['middleware' => ['auth', 'web']], function () {
 
         Route::namespace('Payments')->group(function () {
@@ -123,6 +127,12 @@ Route::namespace('Front')->group(function () {
         Route::get('checkout/cancel', 'CheckoutController@cancel')->name('checkout.cancel');
         Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
         Route::resource('customer.address', 'CustomerAddressController');
+        Route::get('checkout_table', 'CheckoutController@index')->name('checkout_table.index');
+        Route::post('checkout_table', 'CheckoutTableController@store')->name('checkout_table.store');
+        Route::get('checkout_table/execute', 'CheckoutTableController@executePayPalPayment')->name('checkout_table.execute');
+        Route::post('checkout_table/execute', 'CheckoutTableController@charge')->name('checkout_table.execute');
+        Route::get('checkout_table/cancel', 'CheckoutTableController@cancel')->name('checkout_table.cancel');
+        Route::get('checkout_table/success', 'CheckoutTableController@success')->name('checkout_table.success');
     });
     Route::resource('cart', 'CartController');
     Route::get("category/{slug}", 'CategoryController@getCategory')->name('front.category.slug');
