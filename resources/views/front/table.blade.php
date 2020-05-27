@@ -5,6 +5,7 @@
 
     </section>
     <br>
+
 {{--    @if(session()->has('pack'))
         {{ $pack }}
     @endif--}}

@@ -2,6 +2,7 @@
 
 @section('content')
    {{-- {{ dump($cookies) }}--}}
+
     <div class="container product-in-cart-list">
         @if(!$products->isEmpty())
             <div class="row">
@@ -117,7 +118,7 @@
                         @endif
                         <div class="row">
                             <div class="col-md-12">
-                                <legend><i class="fa fa-clock-o"></i>Retrait/Livraison</legend>
+                                <legend><i class="fa fa-clock-o"></i> Retrait/Livraison</legend>
                                 <div class="row">
                                     <div class='col-sm-6'>
                                         <div class="form-group">
