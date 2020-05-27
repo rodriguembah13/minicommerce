@@ -62,7 +62,7 @@ class CategoryController extends Controller
     {
         $this->categoryRepo->createCategory($request->except('_token', '_method'));
 
-        return redirect()->route('admin.categories.index')->with('message', 'Category created');
+        return redirect()->route('admin.categories.index')->with('message', 'Blogcategories created');
     }
 
     /**

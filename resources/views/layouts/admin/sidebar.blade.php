@@ -141,6 +141,19 @@
                     <li><a href="{{ route('admin.couriers.create') }}"><i class="fa fa-plus"></i> Create courier</a></li>
                 </ul>
             </li>
+            <li class="header">Blog</li>
+            <li class="treeview @if(request()->segment(2) == 'blogs') active @endif">
+                <a href="#">
+                    <i class="fa fa-money"></i> <span>Blog</span>
+                    <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('posts') }}"><i class="fa fa-circle-o"></i> list post</a></li>
+                    <li><a href="{{ route('posts.create') }}"><i class="fa fa-circle-o"></i> create post</a></li>
+                </ul>
+            </li>
             <li class="header">CONFIG</li>
             @if($user->hasRole('admin|superadmin'))
                 <li class="treeview @if(request()->segment(2) == 'employees' || request()->segment(2) == 'roles' || request()->segment(2) == 'permissions') active @endif">

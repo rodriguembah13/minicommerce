@@ -22,7 +22,7 @@ Route::namespace('Admin')->group(function () {
     Route::post('admin/login', 'LoginController@login')->name('admin.login');
     Route::get('admin/logout', 'LoginController@logout')->name('admin.logout');
 });
-Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.' ], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.'], function () {
     Route::namespace('Admin')->group(function () {
         Route::group(['middleware' => ['role:admin|superadmin|clerk, guard:employee']], function () {
             Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -69,7 +69,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::resource('roles', 'Roles\RoleController');
             Route::resource('permissions', 'Permissions\PermissionController');
         });
+
     });
+
 });
 
 /**
@@ -142,4 +144,153 @@ Route::namespace('Front')->group(function () {
     Route::post('ajaxRequestTable', 'TableProductController@ajaxRequestPost')->name('front.posttable');
     Route::post('ajaxRequestGetTable', 'TableProductController@ajaxRequestGet')->name('front.gettable');
     Route::post('ajaxRequestDeleteTable', 'TableProductController@ajaxRequestDeleteCart')->name('front.deletetable');
+
+});
+Route::namespace('Blog')->group(function () {
+    Route::get('/post/create', [
+
+
+        'uses' => 'PostsController@create',
+        'as' => 'post.create'
+
+    ]);
+
+    Route::post('/post/store', [
+
+
+        'uses' => 'PostsController@store',
+        'as' => 'post.store'
+
+    ]);
+    Route::get('/posts', [
+
+
+        'uses' => 'PostsController@index',
+        'as' => 'posts'
+
+    ]);
+    Route::get('/posts/delete/{id}', [
+
+
+        'uses' => 'PostsController@destroy',
+        'as' => 'posts.delete'
+
+    ]);
+    Route::get('/posts/trashed', [
+
+
+        'uses' => 'PostsController@trashed',
+        'as' => 'posts.trashed'
+
+    ]);
+    Route::get('/posts/kill/{id}', [
+
+
+        'uses' => 'PostsController@kill',
+        'as' => 'post.kill'
+
+    ]);
+    Route::get('/posts/restore/{id}', [
+
+
+        'uses' => 'PostsController@restore',
+        'as' => 'posts.restore'
+
+    ]);
+    Route::get('/posts/edit/{id}', [
+
+
+        'uses' => 'PostsController@edit',
+        'as' => 'posts.edit'
+
+    ]);
+    Route::post('/posts/update/{id}', [
+
+
+        'uses' => 'PostsController@update',
+        'as' => 'posts.update'
+
+    ]);
+
+    Route::get('/category/create', [
+
+
+        'uses' => 'CategoryController@create',
+        'as' => 'category.create'
+
+    ]);
+
+    Route::post('/category/store', [
+
+
+        'uses' => 'CategoryController@store',
+        'as' => 'category.store'
+
+    ]);
+
+    Route::get('/categories', [
+
+
+        'uses' => 'CategoryController@index',
+        'as' => 'categories'
+
+    ]);
+    Route::get('/category/edit/{id}', [
+
+
+        'uses' => 'CategoryController@edit',
+        'as' => 'category.edit'
+
+    ]);
+    Route::get('/category/delete/{id}', [
+
+
+        'uses' => 'CategoryController@destroy',
+        'as' => 'category.delete'
+
+    ]);
+    Route::post('/category/update/{id}', [
+
+
+        'uses' => 'CategoryController@update',
+        'as' => 'category.update'
+
+    ]);
+
+    Route::get('/tags', [
+
+        'uses' => 'TagsController@index',
+        'as' => 'tags'
+
+    ]);
+    Route::get('/tags/create', [
+
+        'uses' => 'TagsController@create',
+        'as' => 'tag.create'
+
+    ]);
+    Route::post('/tags/store', [
+
+        'uses' => 'TagsController@store',
+        'as' => 'tag.store'
+
+    ]);
+    Route::get('/tags/edit/{id}', [
+
+        'uses' => 'TagsController@edit',
+        'as' => 'tag.edit'
+
+    ]);
+    Route::post('/tags/update/{id}', [
+
+        'uses' => 'TagsController@update',
+        'as' => 'tag.update'
+
+    ]);
+    Route::get('/tags/delete/{id}', [
+
+        'uses' => 'TagsController@destroy',
+        'as' => 'tag.delete'
+
+    ]);
 });

@@ -122,6 +122,6 @@ class CategoryFeatureTest extends TestCase
             ->post(route('admin.categories.store'), $params)
             ->assertStatus(302)
             ->assertRedirect(route('admin.categories.index'))
-            ->assertSessionHas('message', 'Category created');
+            ->assertSessionHas('message', 'Blogcategories created');
     }
 }

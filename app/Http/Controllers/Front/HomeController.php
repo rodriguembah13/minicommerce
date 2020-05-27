@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\Blogcategories;
+use App\Models\Blogpost;
 use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Shop\LinePackProducts\Repositories\Interfaces\LinePackProductRepositoryInterface;
 use App\Shop\Packs\Repositories\Interfaces\PackRepositoryInterface;
@@ -37,6 +39,7 @@ class HomeController
         $cat2 = $this->categoryRepo->findCategoryById(3);
         $pack=$this->packRepo->listPacks();
         //$line=$this->lineRepo->findBy(['']);
+        $posts = Blogpost::orderBy('created_at','desc')->get();
 
         return view('front.index', compact('cat1', 'cat2','pack'));
     }
@@ -54,7 +57,10 @@ class HomeController
      */
     public function blog()
     {
-        return view('front.pages.blog');
+        $posts = Blogpost::orderBy('created_at','desc')->get();
+        return view('front.pages.blog')
+            ->with('categories', Blogcategories::all())
+            ->with('posts', $posts);
     }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
