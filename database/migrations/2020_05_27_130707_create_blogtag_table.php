@@ -13,7 +13,7 @@ class CreateBlogtagTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogtag', function (Blueprint $table) {
+        Schema::create('blogtags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tag');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateBlogtagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogtag');
+        Schema::dropIfExists('blogtags');
     }
 }

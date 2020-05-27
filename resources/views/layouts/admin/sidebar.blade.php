@@ -142,7 +142,7 @@
                 </ul>
             </li>
             <li class="header">Blog</li>
-            <li class="treeview @if(request()->segment(2) == 'blogs') active @endif">
+            <li class="treeview @if(request()->segment(2) == 'post') active @endif">
                 <a href="#">
                     <i class="fa fa-money"></i> <span>Blog</span>
                     <span class="pull-right-container">
@@ -151,7 +151,31 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('posts') }}"><i class="fa fa-circle-o"></i> list post</a></li>
-                    <li><a href="{{ route('posts.create') }}"><i class="fa fa-circle-o"></i> create post</a></li>
+                    <li><a href="{{ route('post.create') }}"><i class="fa fa-circle-o"></i> create post</a></li>
+                </ul>
+            </li>
+            <li class="@if(request()->segment(2) == 'blogcategory') active @endif">
+                <a href="#">
+                    <i class="fa fa-tag"></i> <span>Category</span>
+                    <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('categories') }}"><i class="fa fa-circle-o"></i> List category</a></li>
+                    <li><a href="{{ route('category.create') }}"><i class="fa fa-plus"></i> Create Category</a></li>
+                </ul>
+            </li>
+            <li class="@if(request()->segment(2) == 'blogtag') active @endif">
+                <a href="#">
+                    <i class="fa fa-tag"></i> <span>Tag</span>
+                    <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('tags') }}"><i class="fa fa-circle-o"></i> List Tag</a></li>
+                    <li><a href="{{ route('tag.create') }}"><i class="fa fa-plus"></i> Create Tag</a></li>
                 </ul>
             </li>
             <li class="header">CONFIG</li>

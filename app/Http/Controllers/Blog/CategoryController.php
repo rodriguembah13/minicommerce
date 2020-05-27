@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index')->with('categories',Blogcategories::all());
+        return view('admin.blogs.categories.index')->with('categories',Blogcategories::all());
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.blogs.categories.create');
 
     }
 
@@ -73,7 +73,7 @@ class CategoryController extends Controller
         $category = Blogcategories::find($id);
        
     
-        return view('admin.categories.edit')->with('category', $category);
+        return view('admin.blogs.categories.edit')->with('category', $category);
     }
 
     /**

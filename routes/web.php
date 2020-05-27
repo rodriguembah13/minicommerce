@@ -162,49 +162,49 @@ Route::namespace('Blog')->group(function () {
         'as' => 'post.store'
 
     ]);
-    Route::get('/posts', [
+    Route::get('/post/list', [
 
 
         'uses' => 'PostsController@index',
         'as' => 'posts'
 
     ]);
-    Route::get('/posts/delete/{id}', [
+    Route::get('/post/delete/{id}', [
 
 
         'uses' => 'PostsController@destroy',
         'as' => 'posts.delete'
 
     ]);
-    Route::get('/posts/trashed', [
+    Route::get('/post/trashed', [
 
 
         'uses' => 'PostsController@trashed',
         'as' => 'posts.trashed'
 
     ]);
-    Route::get('/posts/kill/{id}', [
+    Route::get('/post/kill/{id}', [
 
 
         'uses' => 'PostsController@kill',
         'as' => 'post.kill'
 
     ]);
-    Route::get('/posts/restore/{id}', [
+    Route::get('/post/restore/{id}', [
 
 
         'uses' => 'PostsController@restore',
         'as' => 'posts.restore'
 
     ]);
-    Route::get('/posts/edit/{id}', [
+    Route::get('/post/edit/{id}', [
 
 
         'uses' => 'PostsController@edit',
         'as' => 'posts.edit'
 
     ]);
-    Route::post('/posts/update/{id}', [
+    Route::post('/post/update/{id}', [
 
 
         'uses' => 'PostsController@update',
@@ -212,7 +212,7 @@ Route::namespace('Blog')->group(function () {
 
     ]);
 
-    Route::get('/category/create', [
+    Route::get('/blogcategory/create', [
 
 
         'uses' => 'CategoryController@create',
@@ -220,7 +220,7 @@ Route::namespace('Blog')->group(function () {
 
     ]);
 
-    Route::post('/category/store', [
+    Route::post('/blogcategory/store', [
 
 
         'uses' => 'CategoryController@store',
@@ -228,28 +228,28 @@ Route::namespace('Blog')->group(function () {
 
     ]);
 
-    Route::get('/categories', [
+    Route::get('/blogcategory/list', [
 
 
         'uses' => 'CategoryController@index',
         'as' => 'categories'
 
     ]);
-    Route::get('/category/edit/{id}', [
+    Route::get('/blogcategory/edit/{id}', [
 
 
         'uses' => 'CategoryController@edit',
         'as' => 'category.edit'
 
     ]);
-    Route::get('/category/delete/{id}', [
+    Route::get('/blogcategory/delete/{id}', [
 
 
         'uses' => 'CategoryController@destroy',
         'as' => 'category.delete'
 
     ]);
-    Route::post('/category/update/{id}', [
+    Route::post('/blogcategory/update/{id}', [
 
 
         'uses' => 'CategoryController@update',
@@ -257,7 +257,7 @@ Route::namespace('Blog')->group(function () {
 
     ]);
 
-    Route::get('/tags', [
+    Route::get('/tags/list', [
 
         'uses' => 'TagsController@index',
         'as' => 'tags'
@@ -293,4 +293,37 @@ Route::namespace('Blog')->group(function () {
         'as' => 'tag.delete'
 
     ]);
+  /* front  */
+    Route::get('/post/{slug}',[
+
+        'uses' => 'PostsController@singlePost',
+        'as' => 'post.single'
+
+
+    ]);
+    Route::get('/category/{id}',[
+
+        'uses' => 'PostsController@category',
+        'as' => 'category.single'
+
+
+    ]);
+    Route::get('/tag/{id}',[
+
+        'uses' => 'PostsController@tag',
+        'as' => 'tag.single'
+
+
+    ]);
+    Route::get('/results', function(){
+
+        $posts = \App\Models\Blogpost::where('title', 'like', '%' . request('query') .'%')->get();
+
+        return view('results')->with('posts', $posts)
+            ->with('title', 'Search results:' .request('query'))
+            ->with('categories', \App\Models\Blogcategories::take(7)->get())
+            ->with('query', request('query'));
+
+    });
+
 });

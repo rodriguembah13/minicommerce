@@ -13,12 +13,12 @@ class CreateBlogpostTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogpost_tag', function (Blueprint $table) {
+        Schema::create('blogpost_blogtag', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id');
-            $table->integer('tag_id');
-            $table->foreign('post_id')->references('id')->on('blogpost');
-            $table->foreign('tag_id')->references('id')->on('blogtag');
+            $table->integer('blogpost_id');
+            $table->integer('blogtag_id');
+            /*$table->foreign('blogpost_id')->references('id')->on('blogpost');
+            $table->foreign('blogtag_id')->references('id')->on('blogtag');*/
             $table->timestamps();
         });
     }

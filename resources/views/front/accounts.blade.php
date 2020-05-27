@@ -21,10 +21,37 @@
                         <li role="presentation" @if(request()->input('tab') == 'profile') class="active" @endif><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
                         <li role="presentation" @if(request()->input('tab') == 'orders') class="active" @endif><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
                         <li role="presentation" @if(request()->input('tab') == 'address') class="active" @endif><a href="#address" aria-controls="address" role="tab" data-toggle="tab">Addresses</a></li>
+                        <li role="presentation" @if(request()->input('tab') == 'pack') class="active" @endif><a href="#pack" aria-controls="pack_incomplet" role="tab" data-toggle="tab">Pack incomplet</a></li>
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content customer-order-list">
+                        <div role="tabpanel" class="tab-pane @if(request()->input('tab') == 'pack')active @endif" id="pack">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td>Pack</td>
+                                    <td>Quantite utilise</td>
+                                    <td>Quantite Restant</td>
+                                    <td>Date creation</td>
+                                    <td>Date expiration</td>
+                                    <td>Status</td>
+                                    <td>Action</td>
+                                </tr>
+                                </tbody>
+                                <tbody>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span class="label @if($order['total'] != $order['total_paid']) label-danger @else label-success @endif">{{ config('cart.currency') }} {{ $order['total'] }}</span></td>
+                                        <td><p class="text-center" style="color: #ffffff; background-color: {{ $order['status']->color }}">{{ $order['status']->name }}</p></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                         <div role="tabpanel" class="tab-pane @if(request()->input('tab') == 'profile')active @endif" id="profile">
                             {{$customer->name}} <br /><small>{{$customer->email}}</small>
                         </div>

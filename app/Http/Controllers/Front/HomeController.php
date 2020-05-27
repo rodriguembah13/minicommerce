@@ -39,7 +39,7 @@ class HomeController
         $cat2 = $this->categoryRepo->findCategoryById(3);
         $pack=$this->packRepo->listPacks();
         //$line=$this->lineRepo->findBy(['']);
-        $posts = Blogpost::orderBy('created_at','desc')->get();
+       // $posts = Blogpost::orderBy('created_at','desc')->get();
 
         return view('front.index', compact('cat1', 'cat2','pack'));
     }

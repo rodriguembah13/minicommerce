@@ -14,7 +14,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        return view('admin.tags.index')->with('tags',Blogtag::all());
+        return view('admin.blogs.tags.index')->with('tags',Blogtag::all());
     }
 
     /**
@@ -24,7 +24,7 @@ class TagsController extends Controller
      */
     public function create()
     {
-         return view('admin.tags.create');
+         return view('admin.blogs.tags.create');
     }
 
     /**
@@ -82,7 +82,7 @@ class TagsController extends Controller
     public function edit($id)
     {
         $tag = Blogtag::find($id);
-        return view('admin.tags.edit')->with('tag', $tag);
+        return view('admin.blogs.tags.edit')->with('tag', $tag);
     }
 
     /**

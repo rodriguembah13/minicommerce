@@ -21,7 +21,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index')->with('posts', Blogpost::all());
+        return view('admin.blogs.posts.index')->with('posts', Blogpost::all());
     }
 
     /**
@@ -38,7 +38,7 @@ class PostsController extends Controller
 
             return redirect()->back();
         }
-        return view('admin.posts.create')->with('categories',$categories)
+        return view('admin.blogs.posts.create')->with('categories',$categories)
                                          ->with('tags',Blogtag::all());
     }
 
@@ -73,7 +73,7 @@ class PostsController extends Controller
                 'featured' => 'uploads/posts/'. $featuerd_new,
                 'category_id' => $request->category_id,
                 'slug'=> str_slug($request->title),
-                'user_id'=>Auth::id()
+                //'user_id'=>Auth::id()
 
 
         ]);
@@ -107,7 +107,7 @@ class PostsController extends Controller
     {
         $posts = Blogpost::find($id);
 
-        return view('admin.posts.edit')->with('posts',$posts)
+        return view('admin.blogs.posts.edit')->with('posts',$posts)
 
                                        ->with('categories', Blogcategories::all())
                                        ->with('tags',Blogtag::all());
@@ -181,7 +181,7 @@ class PostsController extends Controller
        $posts = Blogpost::onlyTrashed()->get();
       
 
-       return view('admin.posts.trashed')->with('posts', $posts);
+       return view('admin.blogs.posts.trashed')->with('posts', $posts);
 
     }
 
@@ -203,5 +203,53 @@ class PostsController extends Controller
         return redirect()->route('posts');
 
 
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function singlePost($slug)
+    {
+
+        $post = Blogpost::where('slug', $slug)->first();
+
+        $next_id = Blogpost::where('id', '>', $post->id)->min('id');
+        $prev_id = Blogpost::where('id', '<', $post->id)->max('id');
+
+
+        return view('single')->with('post', $post)
+            ->with('title',$post->title)
+            ->with('categories',Blogcategories::take(7)->get())
+            ->with('next',Blogpost::find($next_id))
+            ->with('prev',Blogpost::find($prev_id));
+
+
+
+
+    }
+
+
+
+    public function category($id)
+    {
+
+
+        $category = Blogcategories::find($id);
+        return view('category')->with('category', $category)
+            ->with('title',$category->name)
+            ->with('categories', Blogcategories::take(5)->get());
+    }
+
+
+    public function tag($id)
+    {
+        $tag = Blogtag::find($id);
+        return view('tag')->with('tag',$tag)
+            ->with('title', $tag->tag)
+            ->with('categories', Blogcategories::take(5)->get());
     }
 }
