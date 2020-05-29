@@ -1,6 +1,7 @@
 @extends('layouts.front.app')
 
 @section('content')
+   {{-- {{ dump($cookies) }}--}}
 
     <div class="container product-in-cart-list">
         @if(!$products->isEmpty())
@@ -19,7 +20,7 @@
                     @if(count($addresses) > 0)
                         <div class="row">
                             <div class="col-md-12">
-                                @include('front.products.product-list-table', compact('products'))
+                                @include('front.products.product-list-table2', compact('products'))
                             </div>
                         </div>
                         @if(isset($addresses))
@@ -117,7 +118,7 @@
                         @endif
                         <div class="row">
                             <div class="col-md-12">
-                                <legend><i class="fa fa-clock-o"></i>Retrait/Livraison</legend>
+                                <legend><i class="fa fa-clock-o"></i> Retrait/Livraison</legend>
                                 <div class="row">
                                     <div class='col-sm-6'>
                                         <div class="form-group">
@@ -282,10 +283,10 @@
                 $('.billing_address').val(billingAddressId);
                 $('#dateRetrait').change(function () {
                     var dateRetrait = new Date($(this).val());
-                    alert(dateRetrait.getDay())
-                    $('#date_retrait').val($(this).val());
+                   // alert($('input[name="date_retrait_"]').val())
+                    $('#date_retrait').val($('input[name="date_retrait_"]').val());
                 })
-                $('#date_livraison').change(function () {
+                $('#dateLivraison').change(function () {
                     $('#date_livraison').val($('input[name="date_livraison_"]').val());
                 })
 

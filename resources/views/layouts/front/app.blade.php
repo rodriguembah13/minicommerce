@@ -46,8 +46,9 @@
     @yield('css')
     <meta property="og:url" content="{{ request()->url() }}"/>
     @yield('og')
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
-    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>-->
+     {{--jQuery (necessary for Bootstrap's JavaScript plugins)
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>--}}
+
 </head>
 <body>
 <noscript>
@@ -95,11 +96,11 @@
                 </div>
                 <div class="col-md-6">
                         <ul class="header-menu">
-                            <li class="active"><a href="{{ route('home') }}" class="nav-link">Accueil</a></li>
-                            <li><a href="{{ route('home') }}" class="nav-link">Nos tarifs</a></li>
-                            <li><a href="{{ route('about_path') }}" class="nav-link">Apropos</a></li>
-                            <li><a href="{{ route('blog_path') }}" class="nav-link">Blog</a></li>
-                            <li><a href="{{ route('contact_path') }}" class="nav-link">Contact</a></li>
+                            <li id="home"><a href="{{ route('home') }}" class="nav-link">Accueil</a></li>
+                            <li id="tarif"><a  href="{{ route('tarif_path') }}" class="nav-link">Nos tarifs</a></li>
+                            <li id="apropos"><a href="{{ route('about_path') }}" class="nav-link">Apropos</a></li>
+                            <li id="blog"><a href="{{ route('blog_path') }}" class="nav-link">Blog</a></li>
+                            <li id="contact"><a href="{{ route('contact_path') }}" class="nav-link">Contact</a></li>
                         </ul>
                 </div>
                 <div class="col-md-4">
@@ -112,7 +113,7 @@
 @yield('content')
 
 @include('layouts.front.footer')
-
+<script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/front.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 @yield('js')

@@ -143,3 +143,8 @@ div {
 </div>
 
 @endsection
+@section('js')
+  <script type="text/javascript">
+    $('#blog').addClass('active');
+    </script>
+@endsection

@@ -28,7 +28,7 @@
     <script src="{{ url('https://checkout.stripe.com/checkout.js') }}"></script>
     <script type="text/javascript">
 
-      //  $(document).ready(function () {
+       /* $(document).ready(function () {
             let handler = StripeCheckout.configure({
                 key: "{{ config('stripe.key') }}",
                 locale: 'auto',
@@ -60,5 +60,5 @@
             window.addEventListener('popstate', function() {
                 handler.close();
             });
-    //    });
+       });*/
     </script>

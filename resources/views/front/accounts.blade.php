@@ -2,6 +2,7 @@
 
 @section('content')
     <!-- Main content -->
+    <br>
     <section class="container content">
         <div class="row">
             <div class="box-body">

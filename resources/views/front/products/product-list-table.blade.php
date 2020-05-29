@@ -87,7 +87,7 @@
 </div>
 @endif
 <script type="text/javascript">
-    $(document).ready(function () {
+    /*$(document).ready(function () {
         let courierRadioBtn = $('input[name="rate"]');
         courierRadioBtn.click(function () {
             $('#shippingFee').text($(this).data('fee'));
@@ -97,5 +97,5 @@
             let grandTotal = parseFloat(shippingFee) + parseFloat(total);
             totalElement.html(grandTotal.toFixed(2));
         });
-    });
+    });*/
 </script>

@@ -91,3 +91,8 @@
     </div>
 
 @endsection
+@section('js')
+    <script type="text/javascript">
+        $('#contact').addClass('active');
+    </script>
+@endsection

@@ -47,13 +47,14 @@ mix
             'node_modules/aos/dist/aos.css',
             'resources/assets/css/jquery.fancybox.min.css',
             'resources/assets/css/owl.theme.default.min.css',
+            'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
         ],
         'public/css/style.min.css'
     )
     .scripts(
         [
-            //'node_modules/jquery/dist/jquery.js',
-            'resources/assets/js/jquery-3.3.1.min.js',
+           // 'node_modules/jquery/dist/jquery.js',
+            //'resources/assets/js/jquery-3.3.1.min.js',
             'node_modules/bootstrap/dist/js/bootstrap.js',
             'node_modules/select2/dist/js/select2.js',
             'resources/assets/js/owl.carousel.min.js',
@@ -68,6 +69,7 @@ mix
             'node_modules/owl.carousel/dist/owl.carousel.js',
             'node_modules/aos/dist/aos.js',
             'resources/assets/js/jquery.stellar.min.js',
+            'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
         ],
         'public/js/front.min.js'
     )
@@ -76,7 +78,8 @@ mix
     .copyDirectory('resources/assets/admin-lte/img', 'public/img')
     .copyDirectory('resources/assets/images', 'public/images')
     .copy('resources/assets/js/scripts.js', 'public/js/scripts.js')
-    .copy('resources/assets/js/custom.js', 'public/js/custom.js');
+    .copy('resources/assets/js/custom.js', 'public/js/custom.js')
+    .copy('resources/assets/js/jquery-3.3.1.min.js', 'public/js/jquery.min.js');
 
 /*
 |-----------------------------------------------------------------------

@@ -386,8 +386,16 @@
                     <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure</p>
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
     </div>
 </div>
 
+=======
+@endsection
+@section('js')
+    <script type="text/javascript">
+        $('#apropos').addClass('active');
+    </script>
+>>>>>>> 328e5e547b67d96ed0066a811796139b732ddef6
 @endsection
