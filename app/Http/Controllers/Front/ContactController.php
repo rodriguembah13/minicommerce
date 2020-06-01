@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Front;
 
+
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactMessagesCreated;
-use App\Http\Requests\ContactRequest;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
 {
@@ -101,6 +102,6 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }
