@@ -16,7 +16,7 @@ class Pack extends Model
     protected $fillable = [
         'name',
         'slug',
-        'price','description','status',
+        'price','description','status','id'
     ];
 
     /**

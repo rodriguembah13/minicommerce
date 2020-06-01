@@ -3,6 +3,7 @@
 namespace App\Shop\Packorders;
 
 use App\Shop\Customers\Customer;
+use App\Shop\LinePackorders\LinePackorder;
 use App\Shop\Packs\Pack;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,8 +16,8 @@ class Packorder extends Model
      */
     protected $fillable = [
         'date_expiration',
-        'quantity_restant',
-        'quantity_use','customer_id',
+        'customer_id',
+        'pack_id',
     ];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -31,5 +32,8 @@ class Packorder extends Model
     public function pack()
     {
         return $this->belongsTo(Pack::class);
+    }
+    public function linePackorders(){
+        return $this->hasMany(LinePackorder::class);
     }
 }

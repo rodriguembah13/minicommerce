@@ -26,6 +26,8 @@ use App\Shop\Customers\Repositories\CustomerRepository;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
 use App\Shop\Employees\Repositories\EmployeeRepository;
 use App\Shop\Employees\Repositories\Interfaces\EmployeeRepositoryInterface;
+use App\Shop\LinePackorders\Repositories\Interfaces\LinePackorderRepositoryInterface;
+use App\Shop\LinePackorders\Repositories\LinePackorderRepository;
 use App\Shop\LinePackProducts\Repositories\Interfaces\LinePackProductRepositoryInterface;
 use App\Shop\LinePackProducts\Repositories\LinePackProductRepository;
 use App\Shop\LinePakageProduits\Repositories\Interfaces\LinePakageProduitRepositoryInterface;
@@ -34,6 +36,8 @@ use App\Shop\Orders\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Shop\Orders\Repositories\OrderRepository;
 use App\Shop\OrderStatuses\Repositories\Interfaces\OrderStatusRepositoryInterface;
 use App\Shop\OrderStatuses\Repositories\OrderStatusRepository;
+use App\Shop\Packorders\Repositories\Interfaces\PackorderRepositoryInterface;
+use App\Shop\Packorders\Repositories\PackorderRepository;
 use App\Shop\Packs\Repositories\Interfaces\PackRepositoryInterface;
 use App\Shop\Packs\Repositories\PackRepository;
 use App\Shop\PakageProduits\Repositories\Interfaces\PakageProduitRepositoryInterface;
@@ -162,8 +166,8 @@ class RepositoryServiceProvider extends ServiceProvider
             PakageProduitRepository::class
         );
         $this->app->bind(
-            LinePakageProduitRepositoryInterface::class,
-            LinePakageProduitRepository::class
+            LinePackorderRepositoryInterface::class,
+            LinePackorderRepository::class
         );
         $this->app->bind(
             PackRepositoryInterface::class,
@@ -176,6 +180,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             CsvDataRepositoryInterface::class,
             CsvDataRepository::class
+        );
+        $this->app->bind(
+            PackorderRepositoryInterface::class,
+            PackorderRepository::class
         );
     }
 }

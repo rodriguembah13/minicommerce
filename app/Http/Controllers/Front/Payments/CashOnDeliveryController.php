@@ -7,10 +7,16 @@ namespace App\Http\Controllers\Front\Payments;
 use App\Http\Controllers\Controller;
 use App\Shop\Carts\Repositories\Interfaces\CartRepositoryInterface;
 use App\Shop\Checkout\CheckoutRepository;
+use App\Shop\LinePackorders\Repositories\Interfaces\LinePackorderRepositoryInterface;
+use App\Shop\LinePackProducts\LinePackProduct;
+use App\Shop\LinePackProducts\Repositories\Interfaces\LinePackProductRepositoryInterface;
+use App\Shop\Orders\Order;
 use App\Shop\Orders\Repositories\OrderRepository;
 use App\Shop\OrderStatuses\OrderStatus;
 use App\Shop\OrderStatuses\Repositories\OrderStatusRepository;
+use App\Shop\Packorders\Repositories\Interfaces\PackorderRepositoryInterface;
 use App\Shop\Shipping\ShippingInterface;
+use DateInterval;
 use DateTime;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -40,6 +46,10 @@ class CashOnDeliveryController extends Controller
     private $dateRetrait;
     private $dateLivraison;
     private $packId;
+    private $packOrderRepo;
+
+    private $lineRepo;
+    private $linePackOrderRepo;
 
     /**
      * CashController constructor.
@@ -51,17 +61,21 @@ class CashOnDeliveryController extends Controller
     public function __construct(
         Request $request,
         CartRepositoryInterface $cartRepository,
-        ShippingInterface $shippingRepo
+        ShippingInterface $shippingRepo, PackorderRepositoryInterface $packOrderRepo,
+        LinePackProductRepositoryInterface $linePackProductRepository, LinePackorderRepositoryInterface $linePackorderRepository
     )
     {
         $this->cartRepo = $cartRepository;
+        $this->packOrderRepo = $packOrderRepo;
+        $this->lineRepo = $linePackProductRepository;
+        $this->linePackOrderRepo = $linePackorderRepository;
         $fee = 0;
         $rateObjId = null;
         $shipmentObjId = null;
         $billingAddress = $request->input('billing_address');
-        $this->dateLivraison=$request->input('date_livraison');
-        $this->dateRetrait=$request->input('date_retrait');
-        $this->packId=Cookie::get('pack_id');
+        $this->dateLivraison = $request->input('date_livraison');
+        $this->dateRetrait = $request->input('date_retrait');
+        $this->packId = Cookie::get('pack_id');
         if ($request->has('rate')) {
             if ($request->input('rate') != '') {
 
@@ -83,6 +97,7 @@ class CashOnDeliveryController extends Controller
         $this->shipmentObjId = $shipmentObjId;
         $this->billingAddress = $billingAddress;
     }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -96,9 +111,9 @@ class CashOnDeliveryController extends Controller
             'rateObjectId' => $this->rateObjectId,
             'shipmentObjId' => $this->shipmentObjId,
             'billingAddress' => $this->billingAddress,
-            'dateLivrason'=>$this->dateLivraison,
-            'dateRetrait'=>$this->dateRetrait,
-            'pack_id'=>$this->packId,
+            'dateLivrason' => $this->dateLivraison,
+            'dateRetrait' => $this->dateRetrait,
+            'pack_id' => $this->packId,
         ]);
     }
 
@@ -112,7 +127,7 @@ class CashOnDeliveryController extends Controller
     {
         $checkoutRepo = new CheckoutRepository;
         $orderStatusRepo = new OrderStatusRepository(new OrderStatus);
-        $os = $orderStatusRepo->findByName('encours');
+        $os = $orderStatusRepo->findByName('Ramassage');
         $date = new DateTime($request->input('date_retrait'));
         $dateLivraison = new DateTime($request->input('date_livraison'));
         $order = $checkoutRepo->buildCheckoutItems([
@@ -129,9 +144,9 @@ class CashOnDeliveryController extends Controller
             'total_shipping' => $this->shippingFee,
             'total_paid' => 0,
             'tax' => $this->cartRepo->getTax(),
-            'date_livraison'=>$dateLivraison,
-            'date_retrait'=>$date,
-            'pack_id'=>Cookie::get('pack_id'),
+            'date_livraison' => $dateLivraison,
+            'date_retrait' => $date,
+            'pack_id' => Cookie::get('pack_id'),
         ]);
 
         if (env('ACTIVATE_SHIPPING') == 1) {
@@ -149,7 +164,7 @@ class CashOnDeliveryController extends Controller
 
             $transaction = Shippo_Transaction::create($details);
 
-            if ($transaction['status'] != 'SUCCESS'){
+            if ($transaction['status'] != 'SUCCESS') {
                 Log::error($transaction['messages']);
                 return redirect()->route('checkout.index')->with('error', 'There is an error in the shipment details. Check logs.');
             }
@@ -161,11 +176,42 @@ class CashOnDeliveryController extends Controller
                 'tracking_number' => $transaction['tracking_number']
             ]);
         }
-
+        $this->getPackIncomplet($order);
         Cart::destroy();
         Cookie::queue(Cookie::forget('cart'));
         Cookie::queue(Cookie::forget('pack_id'));
 
         return redirect()->route('accounts', ['tab' => 'orders'])->with('message', 'Order successful!');
+    }
+
+    public function getPackIncomplet(Order $order)
+    {
+        $orderRepo = new OrderRepository($order);
+        $items = $orderRepo->listOrderedProducts();
+        $pack = $order->pack();
+        $date = new DateTime('now');
+        $date->add(new DateInterval('P30D'));
+        $packoder = $this->packOrderRepo->createPackorder([
+            "customer_id" => $order->customer_id,
+            "pack_id" => Cookie::get('pack_id'),
+            "date_expiration" => $date
+        ]);
+        foreach ($items as $item) {
+            if (!is_null($this->lineRepo->findOneBy(['product_id' => $item->id, 'pack_id' => $order->pack->id]))) {
+                $reste=$this->lineRepo->findOneBy(['product_id' => $item->id, 'pack_id' => $order->pack->id])->quantity-$item->quantity;
+                if ($reste>0){
+                    $this->linePackOrderRepo->createLinePackorder([
+                        "quantity_restant" => $reste,
+                        "quantity_use" => $item->quantity,
+                        "packorder_id" => $packoder->id,
+                        "product_id" => $item->id
+                    ]);
+
+                }
+
+            }
+        }
+
+
     }
 }

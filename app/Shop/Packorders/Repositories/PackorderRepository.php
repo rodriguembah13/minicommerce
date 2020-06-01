@@ -4,6 +4,7 @@ namespace App\Shop\Packorders\Repositories;
 
 use App\Shop\Packorders\Packorder;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use Jsdecena\Baserepo\BaseRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -75,6 +76,20 @@ class PackorderRepository extends BaseRepository implements PackorderRepositoryI
     {
         try {
             return $this->findOneOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            throw new ModelNotFoundException($e->getMessage());
+        }
+    }
+    /**
+     * @param int $id
+     *
+     * @return Packorder
+     * @throws ModelNotFoundException
+     */
+    public function findPackorderByCustomer(int $id) : Packorder
+    {
+        try {
+            return $this->model->where('id', $this->model->id);
         } catch (ModelNotFoundException $e) {
             throw new ModelNotFoundException($e->getMessage());
         }

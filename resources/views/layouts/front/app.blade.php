@@ -16,8 +16,8 @@
     <title>{{ config('app.name') }}</title>
     <title>Mini-ccom - Mrpropre</title>
     <meta name="description" content="Modern open-source e-commerce framework for free">
-    <meta name="tags" content="modern, opensource, open-source, e-commerce, framework, free, laravel, php, php7, symfony, shop, shopping, responsive, fast, software, blade, cart, test driven, adminlte, storefront">
-    <meta name="author" content="Jeff Simons Decena">
+    <meta name="tags" content="Services de Pressing, Blanchisserie. Retraits et livraisons gratuits à domicile ou sur votre lieu de travail .">
+    <meta name="author" content="Rodrigue mbah">
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -71,12 +71,6 @@
                         <li><a href="{{ route('login') }}"> <i class="fa fa-lock"></i> Login</a></li>
                         <li><a href="{{ route('register') }}"> <i class="fa fa-sign-in"></i> Register</a></li>
                     @endif
-                    <li id="cart" class="menubar-cart">
-                        <a href="{{ route('cart.index') }}" title="View Cart" class="awemenu-icon menu-shopping-cart">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            <span class="cart-number">{{ $cartCount }}</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -92,7 +86,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" style="" href="{{ route('home') }}"><img id="logo" width="150" style="height: 60px" src="images/logo-m-propre.jpg" alt="Logo" class=""></a>
+                    <a class="navbar-brand" style="" href="{{ route('home') }}"><img id="logo" width="150" style="height: 60px" src="{{ asset('images/logo-m-propre.jpg')}}" alt="Logo" class=""></a>
                 </div>
                 <div class="col-md-6">
                         <ul class="header-menu">
@@ -112,11 +106,11 @@
 </section>
 @yield('content')
 
-@include('layouts.front.footer')
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/front.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 @yield('js')
 @include('flashy::message')
+@include('layouts.front.footer')
 </body>
 </html>

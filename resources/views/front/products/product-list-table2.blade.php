@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5"><b>Name</b></div>
                         <div class="col-lg-2 col-md-2"><b>Quantity</b></div>
-                        <div class="col-lg-1 col-md-1"><b>Remove</b></div>
+                        <div class="col-lg-1 col-md-1"><b></b></div>
                         <div class="col-lg-2 col-md-2"><b>Price</b></div>
                         <div class="col-lg-2 col-md-2"><b>Total</b></div>
                     </div>
@@ -55,16 +55,16 @@
                                     <input type="hidden" name="_method" value="put">
                                     <div class="input-group">
                                         <input type="text" name="quantity" value="{{ $cartItem->qty }}" class="form-control input-sm" />
-                                        <span class="input-group-btn"><button class="btn btn-default btn-sm">Update</button></span>
+                                        {{--<span class="input-group-btn"><button class="btn btn-default btn-sm">Update</button></span>--}}
                                     </div>
                                 </form>
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-8 col-xs-4">
-                                <form action="" method="post">
+                                {{--<form action="" method="post">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="delete">
                                     <button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
-                                </form>
+                                </form>--}}
                             </div>
                             {{--<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                                 <span class="hidden-lg hidden-md"><small>Tax: </span>

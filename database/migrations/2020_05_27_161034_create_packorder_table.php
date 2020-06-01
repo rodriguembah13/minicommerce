@@ -13,11 +13,10 @@ class CreatePackorderTable extends Migration
      */
     public function up()
     {
-        Schema::create('packorder', function (Blueprint $table) {
+        Schema::create('packorders', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('date_expiration')->nullable();
-            $table->integer('quantity_restant');
-            $table->integer('quantity_use');
+            $table->integer('status')->default(0);
             $table->integer('customer_id')->unsigned()->index();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->integer('pack_id')->unsigned();//foreign key
@@ -33,6 +32,6 @@ class CreatePackorderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packorder');
+        Schema::dropIfExists('packorders');
     }
 }

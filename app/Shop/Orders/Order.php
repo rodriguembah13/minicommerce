@@ -100,7 +100,7 @@ class Order extends Model
      */
     public function pack()
     {
-        return $this->belongsTo(Pack::class);
+        return $this->belongsTo(Pack::class,'pack_id');
     }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
