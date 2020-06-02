@@ -15,6 +15,7 @@ interface PackorderRepositoryInterface extends BaseRepositoryInterface
     public function updatePackorder(array $params) : Packorder;
 
     public function findPackorderById(int $id) : Packorder;
+    public function findPackorderByCustomer(int $id):Collection;
     
     public function deletePackorder() : bool;
 }

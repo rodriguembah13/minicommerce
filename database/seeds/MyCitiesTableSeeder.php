@@ -11,7 +11,7 @@ class MyCitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('cities')->insert(array (
+ /*       \DB::table('cities')->insert(array (
             0 =>
                 array (
                     'name' => 'Bangued',
@@ -8198,6 +8198,6 @@ class MyCitiesTableSeeder extends Seeder
                     'name' => 'Tungawan',
                     'province_id' => '80',
                 ),
-        ));
+        ));*/
     }
 }

@@ -435,6 +435,8 @@ private $csvDataRepo;
         $csv_data = json_decode($data->csv_data, true);
         foreach ($csv_data as $row) {
             $product = new Product();
+            $product['status']=1;
+            $product['quantity']=10;
             foreach (config('app.db_fields') as $index => $field) {
                 if ($data->csv_header) {
                     $product->$field = $row[$request->fields[$field]];

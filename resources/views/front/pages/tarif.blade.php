@@ -262,12 +262,12 @@
                         totalArticlePrice = articlesInCart[i][3]*articlesInCart[i][4];
                         totalPrice = totalPrice + totalArticlePrice;
                         totalArticles = totalArticles + articlesInCart[i][4];
-                        itemsMonitorStr = itemsMonitorStr + '<p>' + ' ' + articlesInCart[i][4] + ' x ' + articlesInCart[i][1] + ' : ' + totalArticlePrice.toFixed(2) + '$</p>';
+                        itemsMonitorStr = itemsMonitorStr + '<p>' + ' ' + articlesInCart[i][4] + ' x ' + articlesInCart[i][1] + ' : ' + totalArticlePrice.toFixed(2) + 'f</p>';
                         cart.push(articlesInCart[i][0] + ',' + articlesInCart[i][4]);
                     }
                 }
             }
-            cartMonitorObj.innerHTML = itemsMonitorStr + '<p id="total-commande">Total: ' + totalArticles + ' articles ' + totalPrice.toFixed(2) + '$</p><p><div id="cart-icone"></div> <a href="#" onclick="sendCookieToServer()">Valider la commande</a></p>';
+            cartMonitorObj.innerHTML = itemsMonitorStr + '<p id="total-commande">Total: ' + totalArticles + ' articles ' + totalPrice.toFixed(2) + 'f</p><p><div id="cart-icone"></div> <a href="#" onclick="sendCookieToServer()">Valider la commande</a></p>';
             /*if (totalArticles === 0) {
                 cartMonitorObj.style.display = 'none';
             }

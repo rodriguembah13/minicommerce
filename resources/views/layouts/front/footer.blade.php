@@ -38,7 +38,8 @@
     <div class="footer-right">
         <p class="footer-company-about">
             <span>About the company</span>
-            Chez Mr Propre, nous prenons le plus grand soin de vos vêtements. Nous avons à cœur d'offrir un service de qualité à chacune de nos prestations afin de satisfaire à chacun de vos besoins..</p>
+            Mr Propre est une blanchisserie moderne qui vous propose des services de Pressing
+            et de Blanchisserie haut de gamme pour particuliers et professionnels. <br>Nous effectuons des ramassages et des livraisons gratuits à domicile ou sur votre lieu de travail.</p>
         <div class="footer-icons">
             <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>

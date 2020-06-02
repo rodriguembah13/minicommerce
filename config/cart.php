@@ -64,7 +64,7 @@ return [
 
     ],
 
-    'currency' => env('DEFAULT_CURRENCY', 'USD'),
-    'currency_symbol' => env('CURRENCY_SYMBOL', '$')
+    'currency' => env('DEFAULT_CURRENCY', 'XAF'),
+    'currency_symbol' => env('CURRENCY_SYMBOL', 'cfa')
 
 ];

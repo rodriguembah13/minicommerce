@@ -17,7 +17,7 @@ class Packorder extends Model
     protected $fillable = [
         'date_expiration',
         'customer_id',
-        'pack_id',
+        'pack_id','status',
     ];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

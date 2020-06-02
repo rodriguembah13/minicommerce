@@ -222,10 +222,8 @@ return [
 
     ],
     'db_fields' => [
-        'sku',
         'name',
         'description',
-        'quantity',
         'price',
     ]
 ];

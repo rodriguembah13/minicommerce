@@ -52,16 +52,16 @@
         <div class="col-md-4 col-sm-6">
             <div class="serviceBox purple">
                 <div class="service-icon">
-                    <span><i class="fa fa-rocket"></i></span>
+                    <span><i class="fa fa-flash"></i></span>
                 </div>
-                <h3 class="title">Le pré détachage</h3>
-                <p class="description">Le nettoyage offre une action globale sur l’ensemble du vêtement. En amont, la
-                    phase de détachage permet une action localisée et ciblée. Mr PROPRE a élaboré des produits adaptés
-                    aux diverses substances de taches, à la couleur, et à la nature spécifique du tissu traité. Ainsi le
-                    pré détachage permettra au lavage ou au nettoyage d’être le plus efficace possible
-                    afin de vous garantir un résultat impeccable.</p>
+                <h3 class="title">Le repassage</h3>
+                <p class="description">Nous avons à cœur de vous rendre un article impeccablement repassé, selon une
+                    technique qui respecte les fibres et le textile. Nos techniques font l’objet d’améliorations
+                    continues sur la qualité de repassage de vos articles comme l’ergonomie de travail de nos
+                    équipes.</p>
             </div>
         </div>
+
         <div class="col-md-4 col-sm-6">
             <div class="serviceBox blue">
                 <div class="service-icon">
@@ -96,6 +96,19 @@
                 <p class="description">Après l’ensemble des prestations réalisées, nous évaluons la qualité de nettoyage
                     et de repassage selon les standards les plus élevés afin de vous restituer des articles
                     impeccables.</p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="serviceBox purple">
+                <div class="service-icon">
+                    <span><i class="fa fa-rocket"></i></span>
+                </div>
+                <h3 class="title">Le pré détachage</h3>
+                <p class="description">Le nettoyage offre une action globale sur l’ensemble du vêtement. En amont, la
+                    phase de détachage permet une action localisée et ciblée. Mr PROPRE a élaboré des produits adaptés
+                    aux diverses substances de taches, à la couleur, et à la nature spécifique du tissu traité. Ainsi le
+                    pré détachage permettra au lavage ou au nettoyage d’être le plus efficace possible
+                    afin de vous garantir un résultat impeccable.</p>
             </div>
         </div>
     </div>

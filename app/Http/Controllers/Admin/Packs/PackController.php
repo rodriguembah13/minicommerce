@@ -115,8 +115,8 @@ class PackController extends Controller
        /**/ $options['pack_id'] = $id;
         $options['product_id'] = $product->id;
         $this->linePackProductRepo->createLinePackProduct($options);
-        $price=$pack->price+($product->getBuyablePrice()*$request->input('quantity'));
-        $this->packRepo->updatePricePack(['id'=>$id,'price'=>$price]);
+        /*$price=$pack->price+($product->getBuyablePrice()*$request->input('quantity'));
+        $this->packRepo->updatePricePack(['id'=>$id,'price'=>$price]);*/
         return redirect()->route('admin.packs.edit', $id)->with('message', 'Create pack successful!'.$options['quantity']);
     }
     /**

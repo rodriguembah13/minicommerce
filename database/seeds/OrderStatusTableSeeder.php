@@ -8,12 +8,12 @@ class OrderStatusTableSeeder extends Seeder
     public function run()
     {
         factory(OrderStatus::class)->create([
-            'name' => 'paid',
+            'name' => 'pret et attente de livraison',
             'color' => 'green'
         ]);
 
         factory(OrderStatus::class)->create([
-            'name' => 'pending',
+            'name' => 'Ramassage',
             'color' => 'yellow'
         ]);
 
@@ -28,7 +28,7 @@ class OrderStatusTableSeeder extends Seeder
         ]);
 
         factory(OrderStatus::class)->create([
-            'name' => 'ordered',
+            'name' => 'Nettoyage',
             'color' => 'violet'
         ]);
     }

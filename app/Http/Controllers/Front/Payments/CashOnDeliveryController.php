@@ -15,6 +15,7 @@ use App\Shop\Orders\Repositories\OrderRepository;
 use App\Shop\OrderStatuses\OrderStatus;
 use App\Shop\OrderStatuses\Repositories\OrderStatusRepository;
 use App\Shop\Packorders\Repositories\Interfaces\PackorderRepositoryInterface;
+use App\Shop\Packorders\Repositories\PackorderRepository;
 use App\Shop\Shipping\ShippingInterface;
 use DateInterval;
 use DateTime;
@@ -130,6 +131,12 @@ class CashOnDeliveryController extends Controller
         $os = $orderStatusRepo->findByName('Ramassage');
         $date = new DateTime($request->input('date_retrait'));
         $dateLivraison = new DateTime($request->input('date_livraison'));
+        $id_pack=null;
+        if (Cookie::get('pack_id')==null){
+            $id_pack=1;
+        }else{
+            $id_pack=Cookie::get('pack_id');
+        }
         $order = $checkoutRepo->buildCheckoutItems([
             'reference' => Uuid::uuid4()->toString(),
             'courier_id' => 1, // @deprecated
@@ -146,7 +153,7 @@ class CashOnDeliveryController extends Controller
             'tax' => $this->cartRepo->getTax(),
             'date_livraison' => $dateLivraison,
             'date_retrait' => $date,
-            'pack_id' => Cookie::get('pack_id'),
+            'pack_id' => $id_pack,
         ]);
 
         if (env('ACTIVATE_SHIPPING') == 1) {
@@ -176,7 +183,13 @@ class CashOnDeliveryController extends Controller
                 'tracking_number' => $transaction['tracking_number']
             ]);
         }
-        $this->getPackIncomplet($order);
+
+        if (!empty(Cookie::get('pack_id'))){
+            $this->getPackIncomplet($order);
+        }else{
+            $this->desaeblePackincomplet($order);
+        }
+
         Cart::destroy();
         Cookie::queue(Cookie::forget('cart'));
         Cookie::queue(Cookie::forget('pack_id'));
@@ -188,7 +201,7 @@ class CashOnDeliveryController extends Controller
     {
         $orderRepo = new OrderRepository($order);
         $items = $orderRepo->listOrderedProducts();
-        $pack = $order->pack();
+        $pack = $order->pack()->first();
         $date = new DateTime('now');
         $date->add(new DateInterval('P30D'));
         $packoder = $this->packOrderRepo->createPackorder([
@@ -196,6 +209,21 @@ class CashOnDeliveryController extends Controller
             "pack_id" => Cookie::get('pack_id'),
             "date_expiration" => $date
         ]);
+        $item_packs=$this->lineRepo->findBy(['pack_id'=>$order->pack->id]);
+        $prods=[];
+        foreach ($items as $item_pack){
+            $prods[]=$item_pack->id;
+        }
+        foreach ($item_packs as $item_pack){
+           if (!in_array($item_pack->product->id, $prods)) {
+                 $this->linePackOrderRepo->createLinePackorder([
+                     "quantity_restant" => $item_pack->quantity,
+                     "quantity_use" => 0,
+                     "packorder_id" => $packoder->id,
+                     "product_id" => $item_pack->product->id
+                 ]);
+             }
+        }
         foreach ($items as $item) {
             if (!is_null($this->lineRepo->findOneBy(['product_id' => $item->id, 'pack_id' => $order->pack->id]))) {
                 $reste=$this->lineRepo->findOneBy(['product_id' => $item->id, 'pack_id' => $order->pack->id])->quantity-$item->quantity;
@@ -213,5 +241,15 @@ class CashOnDeliveryController extends Controller
         }
 
 
+    }
+    public function desaeblePackincomplet(Order $order){
+        $packincomplets=$this->packOrderRepo->findBy(['customer_id'=>$order->customer_id,'status'=>0]);
+        foreach ($packincomplets as $packincomplet){
+            $packrep=new PackorderRepository($packincomplet);
+            $packrep->updatePackorder([
+                'status'=> "1"
+            ]);
+            //$packrep->deletePackorder();
+        }
     }
 }

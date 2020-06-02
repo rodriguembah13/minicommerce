@@ -83,17 +83,18 @@ class PackorderRepository extends BaseRepository implements PackorderRepositoryI
     /**
      * @param int $id
      *
-     * @return Packorder
+     * @return
      * @throws ModelNotFoundException
      */
-    public function findPackorderByCustomer(int $id) : Packorder
+    public function findPackorderByCustomer(int $id) : Collection
     {
         try {
-            return $this->model->where('id', $this->model->id);
+            return $this->model->orderBy('created_at','desc')->where('customer_id', $id)->where('status', 0)->get();
         } catch (ModelNotFoundException $e) {
             throw new ModelNotFoundException($e->getMessage());
         }
     }
+
 
     /**
      * Delete a dummy

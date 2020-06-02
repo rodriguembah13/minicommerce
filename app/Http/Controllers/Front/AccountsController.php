@@ -8,6 +8,7 @@ use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Shop\Orders\Order;
 use App\Shop\Orders\Transformers\OrderTransformable;
+use App\Shop\Packorders\Packorder;
 use App\Shop\Packorders\Repositories\Interfaces\PackorderRepositoryInterface;
 use App\Shop\Products\Product;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
@@ -52,7 +53,8 @@ class AccountsController extends Controller
 
         $customerRepo = new CustomerRepository($customer);
         $orders = $customerRepo->findOrders(['*'], 'created_at');
-        $packorders=$this->packorderRepo->findBy(['customer_id'=>$customer->id]);
+        //$packorders=$this->packorderRepo->findBy(['customer_id'=>$customer->id]);
+        $packorders=$this->packorderRepo->findPackorderByCustomer($customer->id);
         $orders->transform(function (Order $order) {
             return $this->transformOrder($order);
         });
