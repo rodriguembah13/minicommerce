@@ -23,7 +23,7 @@
 
     </section>
     <br>
-
+{{$carPack}}
 {{--    @if(session()->has('pack'))
         {{ $pack }}
     @endif--}}
@@ -244,12 +244,17 @@
                     $('#in-pack-'+id).text(data[0].inPack);
                     $(statusok).removeClass('hidden');
                     $(statusm).addClass('hidden');
+                    setInCartPack(id,$('#quantity-'+id).val());
+                    checkCartPack();
                 }
                 ,error: function(xhr, status, error) {
                    $(statusnok).removeClass('hidden');
                     $(statusm).addClass('hidden');
                     $('#hors-pack-'+id).text($(qte).val());
                     $('#in-pack-'+id).text(0);
+                    setInCart(id,$('#quantity-'+id).val());
+                    checkCart();
+                   // alert(id)
                     $('#total-hors-pack').text($('#total-hors-pack').text()+($(qte).val()*$('#product-price-'+id).text()));
                     //var err = eval("(" + xhr.responseJSON.error + ")");
                     /*alert(error);
@@ -314,18 +319,38 @@
             now.setTime(now.getTime() + 30 * 24 * 3600 * 1000);
             document.cookie = 'cart=' + cart.join('-') + '; expires=' + now.toUTCString() + '; path=/';
         }
+        function checkCartPack() {
+            cartPack = new Array();
+            itemsMonitorStrPack = '';
+            totalPricePack = 0;
+            totalArticlesPack = 0;
+            //id;name;desc;price;quantity
+            for (var i = 0; i < articlesInCartPack.length; i++) {
+                if (typeof articlesInCartPack[i] !== 'undefined') {
+                    if (articlesInCartPack[i][4] > 0) {
+                         cartPack.push(articlesInCartPack[i][0] + ',' + articlesInCartPack[i][4]);
+                    }
+                }
+            }
+            var now = new Date();
+            now.setTime(now.getTime() + 30 * 24 * 3600 * 1000);
+            document.cookie = 'cartPack='+1 + cartPack.join('-') + '; expires=' + now.toUTCString() + '; path=/';
+        }
         function addArticle(articleId) {
-            setInCart(articleId,$('#quantity-'+articleId).val());
+           // setInCart(articleId,$('#quantity-'+articleId).val());
            getItem(articleId);
-            checkCart();
+          //  checkCart();
         }
         function removeArticle(articleId) {
             setInCart(articleId,0);
             $('#quantity-'+articleId).val(0)
             checkCart();
+            //------------//-------------//
+            setInCartPack(articleId,0);
+            checkCartPack()
         }
         function setInCart(articleId,setQuantity) {
-
+//alert(articleId)
             //	0=id ; 1=name ; 2=desc ; 3=price ; 4=quantity
             var article = new Array();
             article[0] = parseInt(articleId);
@@ -349,6 +374,22 @@
             articleQuantityObj.innerHTML = article[4];
            // alert('testqua'+article[4])
         }
+        function setInCartPack(articleId,setQuantity) {
+            //	0=id ; 1=name ; 2=desc ; 3=price ; 4=quantity
+            var article = new Array();
+            article[0] = parseInt(articleId);
+            article[1] = document.getElementById('product-name-'+articleId).innerHTML;
+            article[2] = document.getElementById('product-name-'+articleId).innerHTML;
+            article[3] = parseFloat(document.getElementById('product-price-'+articleId).innerHTML);
+            article[4] = parseInt(setQuantity);
+
+            articlesInCartPack[articleId] = article;
+            articleQuantityObjPack = document.getElementById('quantity-'+articleId);
+            if (article[4] === 0) articleQuantityObjPack.className = '';
+            else articleQuantityObjPack.className = 'added';
+            articleQuantityObjPack.innerHTML = article[4];
+            // alert('testqua'+article[4])
+        }
         function loadCartFromCookie() {
             var cartCookie = getCookieValueByRegEx('cart');
             var cookieItems = cartCookie.split('-');
@@ -359,6 +400,16 @@
             }
             checkCart();
         }
+        function loadCartFromCookiePack() {
+            var cartCookie = getCookieValueByRegEx('cartPack');
+            var cookieItems = cartCookie.split('-');
+            for (var i = 0; i < cookieItems.length; i++) {
+                var cookieItem = cookieItems[i].split(',');
+                // 0 = id; 1 = quantity
+                setInCartPack(cookieItem[0],cookieItem[1]);
+            }
+            checkCartPack();
+        }
         function sendCookieToServer() {
             var cartCookie = getCookieValueByRegEx('cart');
             var cookieItems = cartCookie.split('-');
@@ -367,20 +418,21 @@
             document.cookie = 'pack_id=' + $('#itemValue').text() + '; expires=' + now.toUTCString() + '; path=/';
             for (var i = 0; i < cookieItems.length; i++) {
                 var cookieItem = cookieItems[i].split(',');
-                // 0 = id; 1 = quantity
-               // setInCart(cookieItem[0],cookieItem[1]);
-               // sendAjaxPost(cookieItem[0],cookieItem[1]);
             }
-            //delete cookie on computer
-           // document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
             window.location.replace("/checkout_table");
         }
         function getCookieValueByRegEx(a, b) {
             b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
             return b ? b.pop() : '';
         }
+        function getCookieValueByRegExPack(a, b) {
+            b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+            return b ? b.pop() : '';
+        }
         function initCart() {
             articlesInCart = [];
+            articlesInCartPack = [];
             cartMonitorObj = document.getElementById('cart1');
             //if (location.hash == '#articles') {
                 //$('#articles').show();
@@ -388,6 +440,9 @@
            // }
             if (getCookieValueByRegEx('cart')) {
                 loadCartFromCookie();
+            }
+            if (getCookieValueByRegExPack('cartPack')) {
+                loadCartFromCookiePack();
             }
 
         }

@@ -15,6 +15,7 @@ use App\Shop\Customers\Customer;
 use App\Shop\Customers\Repositories\CustomerRepository;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
 use App\Shop\Orders\Repositories\Interfaces\OrderRepositoryInterface;
+use App\Shop\Packs\Pack;
 use App\Shop\PaymentMethods\Paypal\Exceptions\PaypalRequestError;
 use App\Shop\PaymentMethods\Paypal\Repositories\PayPalExpressCheckoutRepository;
 use App\Shop\PaymentMethods\Stripe\Exceptions\StripeChargingErrorException;
@@ -157,6 +158,7 @@ private $collection;
             'shipment_object_id' => $shipment_object_id,
             'rates' => $rates,
             'cookies'=>$products,
+            'pack'=>Pack::find(Cookie::get('pack_id')),
         ]);
     }
 

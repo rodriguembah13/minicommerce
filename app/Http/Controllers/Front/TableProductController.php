@@ -11,6 +11,7 @@ use App\Shop\ProductAttributes\Repositories\ProductAttributeRepositoryInterface;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Shop\Products\Transformations\ProductTransformable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class TableProductController extends Controller
@@ -59,6 +60,7 @@ class TableProductController extends Controller
         return view('front.table', [
             'products' => $this->productRepo->listProducts()->where('status', 1),
             'pack'=>$pack,
+            'carPack'=>Cookie::get('cartPack')
         ]);
     }
     /**

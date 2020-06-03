@@ -76,7 +76,32 @@
         </div>
     </div>
     <header id="header-section">
-        <nav class="navbar navbar-default">
+        <div class="main_nav_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <div class="logo_container">
+                           {{-- <a href="#">colo<span>shop</span></a>--}}
+                            <a class="navbar-bran" style="" href="{{ route('home') }}"><img id="logo" width="150" style="height: 80px" src="{{ asset('images/logo-m-propre.jpg')}}" alt="Logo" class=""></a>
+
+                        </div>
+                        <nav class="navbar">
+                            <ul class="navbar_menu">
+                                <li id="home"><a href="{{ route('home') }}" class="nav-link">Accueil</a></li>
+                                <li id="tarif"><a  href="{{ route('tarif_path') }}" class="nav-link">Nos tarifs</a></li>
+                                <li id="apropos"><a href="{{ route('about_path') }}" class="nav-link">Apropos</a></li>
+                                <li id="blog"><a href="{{ route('blog_path') }}" class="nav-link">Blog</a></li>
+                                <li id="contact"><a href="{{ route('contact_path') }}" class="nav-link">Contact</a></li>
+                            </ul>
+                            <div class="hamburger_container">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{--    <nav class="navbar navbar-default">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header col-md-2">
@@ -101,7 +126,7 @@
                     @include('layouts.front.header-cart')
                 </div>
             </div>
-        </nav>
+        </nav>--}}
     </header>
 </section>
 @yield('content')

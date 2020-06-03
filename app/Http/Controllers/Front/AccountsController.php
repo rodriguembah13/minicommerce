@@ -10,6 +10,7 @@ use App\Shop\Orders\Order;
 use App\Shop\Orders\Transformers\OrderTransformable;
 use App\Shop\Packorders\Packorder;
 use App\Shop\Packorders\Repositories\Interfaces\PackorderRepositoryInterface;
+use App\Shop\Packs\Pack;
 use App\Shop\Products\Product;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
 

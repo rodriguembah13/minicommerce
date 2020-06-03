@@ -12,7 +12,7 @@
                         <li class="active">Shopping Cart</li>
                     </ol>
                 </div>
-
+{{--//{{$pack}}--}}
                 <div class="col-md-12 content">
                     <div class="box-body">
                         @include('layouts.errors-and-messages')
@@ -20,7 +20,7 @@
                     @if(count($addresses) > 0)
                         <div class="row">
                             <div class="col-md-12">
-                                @include('front.products.product-list-table2', compact('products'))
+                                @include('front.products.product-list-table2', compact('products','pack'))
                             </div>
                         </div>
                         @if(isset($addresses))

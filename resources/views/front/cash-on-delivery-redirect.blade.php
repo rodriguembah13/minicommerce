@@ -18,9 +18,16 @@
                         <hr>
                         <ul class="list-unstyled">
                             <li>Items: {{ config('cart.currency_symbol') }} {{ $subtotal }}</li>
+                           @if($pack)
+                            <li>Pack :{{$pack->name}} {{ config('cart.currency_symbol') }} {{ $pack->price }}</li>
+                           @endif
                             <li>Tax: {{ config('cart.currency_symbol') }} {{ $tax }}</li>
                             <li>Shipping Fee: {{ config('cart.currency_symbol') }} {{ $shipping }}</li>
-                            <li>Total: {{ config('cart.currency_symbol') }} {{ $total }}</li>
+                            @if($pack)
+                                <li>Total: {{ config('cart.currency_symbol') }} {{ $total +$pack->price }}</li>
+                            @else
+                            <li>Total: {{ config('cart.currency_symbol') }} {{ $total}}</li>
+                            @endif
                         </ul>
                     </div>
                     <div class="col-md-6">

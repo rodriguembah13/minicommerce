@@ -16,6 +16,7 @@ use App\Shop\OrderStatuses\OrderStatus;
 use App\Shop\OrderStatuses\Repositories\OrderStatusRepository;
 use App\Shop\Packorders\Repositories\Interfaces\PackorderRepositoryInterface;
 use App\Shop\Packorders\Repositories\PackorderRepository;
+use App\Shop\Packs\Pack;
 use App\Shop\Shipping\ShippingInterface;
 use DateInterval;
 use DateTime;
@@ -115,6 +116,7 @@ class CashOnDeliveryController extends Controller
             'dateLivrason' => $this->dateLivraison,
             'dateRetrait' => $this->dateRetrait,
             'pack_id' => $this->packId,
+            'pack' => Pack::find($this->packId),
         ]);
     }
 
@@ -132,10 +134,14 @@ class CashOnDeliveryController extends Controller
         $date = new DateTime($request->input('date_retrait'));
         $dateLivraison = new DateTime($request->input('date_livraison'));
         $id_pack=null;
+        $price_pack=0;
         if (Cookie::get('pack_id')==null){
             $id_pack=1;
+            $price_pack=0;
         }else{
             $id_pack=Cookie::get('pack_id');
+            $ppack=Pack::find($id_pack);
+            $price_pack=$ppack->price;
         }
         $order = $checkoutRepo->buildCheckoutItems([
             'reference' => Uuid::uuid4()->toString(),
@@ -147,7 +153,7 @@ class CashOnDeliveryController extends Controller
             'payment' => strtolower(config('cash-on-delivery.name')),
             'discounts' => 0,
             'total_products' => $this->cartRepo->getSubTotal(),
-            'total' => $this->cartRepo->getTotal(2, $this->shippingFee),
+            'total' => $this->cartRepo->getTotal(2, $this->shippingFee)+$price_pack,
             'total_shipping' => $this->shippingFee,
             'total_paid' => 0,
             'tax' => $this->cartRepo->getTax(),
@@ -201,6 +207,15 @@ class CashOnDeliveryController extends Controller
     {
         $orderRepo = new OrderRepository($order);
         $items = $orderRepo->listOrderedProducts();
+        $cookie = Cookie::get('cartPack');
+        $values=explode('-', $cookie) ;
+        $product_id_array=[];
+        for ( $i = 0; $i < sizeof($values); $i++) {
+            $cookieItem = explode(',',$values[$i]);
+            //$product_array[]=$this->productRepo->find($cookieItem[0]);
+            array_push($product_id_array,$cookieItem[0]);
+            // 0 = id; 1 = quantity
+        }
         $pack = $order->pack()->first();
         $date = new DateTime('now');
         $date->add(new DateInterval('P30D'));
@@ -215,7 +230,7 @@ class CashOnDeliveryController extends Controller
             $prods[]=$item_pack->id;
         }
         foreach ($item_packs as $item_pack){
-           if (!in_array($item_pack->product->id, $prods)) {
+           if (!in_array($item_pack->product->id, $product_id_array)) {
                  $this->linePackOrderRepo->createLinePackorder([
                      "quantity_restant" => $item_pack->quantity,
                      "quantity_use" => 0,

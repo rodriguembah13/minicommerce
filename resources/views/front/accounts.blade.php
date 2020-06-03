@@ -130,7 +130,14 @@
                                                                       <td>{{$product['price']}}</td>
                                                                       <td><img src="{{ asset("storage/".$product['cover']) }}" width=50px height=50px alt="{{ $product['name'] }}" class="img-orderDetail"></td>
                                                                   </tr>
+
                                                               @endforeach
+                                                              <tr>
+                                                                  <span class="hidden">  $pack = {{$pack= \App\Shop\Packs\Pack::find($order['pack_id'])}}</span>
+                                                                  <td>{{$pack->name}}</td>
+                                                                  <td>1</td>
+                                                                  <td>{{$pack->price}}</td>
+                                                              </tr>
                                                               </tbody>
                                                             </table>
                                                         </div>
