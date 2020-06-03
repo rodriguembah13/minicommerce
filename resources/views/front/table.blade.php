@@ -62,7 +62,7 @@
             <tr id="product-{{$product->id}}">
                 <th scope="row">{{$product->id}}</th>
                 <td id="product-name-{{$product->id}}">{{$product->name}}</td>
-                <td id="product-price-{{$product->id}}">{{--{{ config('cart.currency') }} --}}{{$product->price}}</td>
+                <td id="product-price-{{$product->id}}">{{$product->price}}</td>
 
                 <td><input  id="quantity-{{$product->id}}" name="name-{{$product->id}}" type="number" class="form-control" value="0" step="1" min="0">
                     {{--<div class="input-group spinner">
@@ -84,6 +84,12 @@
                 <td><span id="hors-pack-{{$product->id}}"></span></td>
             </tr>
             @endforeach
+            <tr>
+                <td colspan="5"></td>
+                <td>Subtotal:</td>
+                <td><span id="total-pack"></span></td>
+                <td><span id="total-hors-pack">0</span></td>
+            </tr>
             </tbody>
         </table>
         <span class="hidden" id="itemValue">{{$pack->id}}</span>
@@ -244,6 +250,7 @@
                     $(statusm).addClass('hidden');
                     $('#hors-pack-'+id).text($(qte).val());
                     $('#in-pack-'+id).text(0);
+                    $('#total-hors-pack').text($('#total-hors-pack').text()+($(qte).val()*$('#product-price-'+id).text()));
                     //var err = eval("(" + xhr.responseJSON.error + ")");
                     /*alert(error);
                     console.log("Error: ", xhr.responseJSON.error);
