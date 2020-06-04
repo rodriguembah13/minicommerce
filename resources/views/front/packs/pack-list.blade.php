@@ -1,6 +1,6 @@
 @foreach($packs as $pack)
 <div class="item-1 h">
-    <img src="images/hero_2.jpg" alt="Image" class="img-fluid">
+    <img src="images/clothes.jpg" alt="Image" class="img-fluid">
     <div class="item-1-contents">
         <h3>{{$pack->name}} <span style="color: #0a0c0d">({{$pack->price}} F)</span></h3>
         <ul>
