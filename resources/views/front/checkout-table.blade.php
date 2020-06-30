@@ -24,9 +24,11 @@
                             </div>
                         </div>
                         @if(isset($addresses))
+                            <br>
                             <div class="row">
                                 <div class="col-md-12">
                                     <legend><i class="fa fa-home"></i> Addresses</legend>
+                                    <br>
                                     <table class="table table-striped">
                                         <thead>
                                         <th>Alias</th>
@@ -116,14 +118,16 @@
                                 </div>
                             </div> <br>
                         @endif
+                    <br>
                         <div class="row">
                             <div class="col-md-12">
                                 <legend><i class="fa fa-clock-o"></i> Retrait/Livraison</legend>
+                                <br>
                                 <div class="row">
                                     <div class='col-sm-6'>
                                         <div class="form-group">
                                             <div class='input-group date' id='dateRetrait'>
-                                                <input type='text' class="form-control" name="date_retrait_"/>
+                                                <input type='text' class="form-control" name="date_retrait_" placeholder="Date de retrait"/>
                                                 <span class="input-group-addon">
                         <span class="fa fa-calendar"></span>
                     </span>
@@ -131,16 +135,18 @@
                                         </div>
                                     </div>
                                     <div id="dateLivraison" class="input-group date">
-                                        <input id="dateLivraison1" name="date_livraison_" type="text"
+                                        <input id="dateLivraison1" name="date_livraison_" type="text" placeholder="Date de livraison"
                                                class="form-control"><span class="input-group-addon"><i
                                                     class="fa fa-th-list"></i></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    <br>
                         <div class="row">
                             <div class="col-md-12">
                                 <legend><i class="fa fa-credit-card"></i> Payment</legend>
+                                <br>
                                 @if(isset($payments) && !empty($payments))
                                     <table class="table table-striped">
                                         <thead>
@@ -219,13 +225,13 @@
             calendarWeeks: true,
             autoclose: true,
             todayHighlight: true,
-            format: 'yyyy-m-d',
+            //format: 'yyyy-m-d',
             beforeShowMonth: function (date) {
                 if (date.getMonth() == 8) {
                     return false;
                 }
             },
-            defaultViewDate: {year: 2020, month: 4, day: 25}
+           // defaultViewDate: {year: 2020, month: 4, day: 25}
         });
 
         //$('#datetimepicker1').datetimepicker();

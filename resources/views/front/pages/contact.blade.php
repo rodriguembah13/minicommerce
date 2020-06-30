@@ -40,9 +40,9 @@
     <div class="site-section bg-light conte" id="contact-section">
         <div class="container">
           <div class="row justify-content-center text-center">
-          <div class="col-7 text-center mb-5">
+          <div class="col-md-7 text-center mb-5">
             <h2>Contact Us Or Use This Form To Rent A Car</h2>
-            <p style="padding-bottom: 30px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum voluptates sed!</p>
+            <p style="padding-bottom: 30px;"></p>
           </div>
         </div>
           <div class="row">

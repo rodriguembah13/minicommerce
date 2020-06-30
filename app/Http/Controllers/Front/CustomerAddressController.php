@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Shop\Addresses\Requests\CreateAddressRequest;
 use App\Shop\Addresses\Requests\UpdateAddressRequest;
 use App\Shop\Addresses\Repositories\AddressRepository;
+use App\Shop\Carts\Repositories\Interfaces\CartRepositoryInterface;
 use App\Shop\Cities\Repositories\Interfaces\CityRepositoryInterface;
 use App\Shop\Addresses\Repositories\Interfaces\AddressRepositoryInterface;
 use App\Shop\Countries\Repositories\Interfaces\CountryRepositoryInterface;
@@ -32,7 +33,7 @@ class CustomerAddressController extends Controller
      * @var ProvinceRepositoryInterface
      */
     private $provinceRepo;
-
+private $cartRepo;
 
     /**
      * @param AddressRepositoryInterface  $addressRepository
@@ -44,12 +45,14 @@ class CustomerAddressController extends Controller
         AddressRepositoryInterface $addressRepository,
         CountryRepositoryInterface $countryRepository,
         CityRepositoryInterface $cityRepository,
-        ProvinceRepositoryInterface $provinceRepository
+        ProvinceRepositoryInterface $provinceRepository,
+        CartRepositoryInterface $cartRepository
     ) {
         $this->addressRepo = $addressRepository;
         $this->countryRepo = $countryRepository;
         $this->provinceRepo = $provinceRepository;
         $this->cityRepo = $cityRepository;
+        $this->cartRepo=$cartRepository;
     }
 
     /**
@@ -87,8 +90,13 @@ class CustomerAddressController extends Controller
 
         $this->addressRepo->createAddress($request->except('_token', '_method'));
 
-        return redirect()->route('accounts', ['tab' => 'address'])
-            ->with('message', 'Address creation successful');
+
+       if ($this->cartRepo->getCartItems() !== null) {
+            return redirect()->route('checkout_table.index');
+        } else {
+           return redirect()->route('accounts', ['tab' => 'address'])
+               ->with('message', 'Address creation successful');
+    }
     }
 
     /**
