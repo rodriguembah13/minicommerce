@@ -3,7 +3,7 @@
 @section('content')
     <section id="hero" class="hero-section top-area">
         <div class="container">
-            <div class="row">
+            <div class="row" data-aos="zoom-in-down">
                 <div class="col-md-10">
                     <div class="hero-content" style="text-align: center;">
                         <h2 class="hero-title" style="color: #ffffff">{{$pack->name}}</h2>
@@ -23,12 +23,12 @@
 
     </section>
     <br>
-{{$carPack}}
+    {{--$carPack --}}
 {{--    @if(session()->has('pack'))
-        {{ $pack }}
-    @endif--}}
+            {{ $pack }}
+        @endif--}}
     <div class="container" id="articles">
-        <div class="row">
+        <div class="row" data-aos="zoom-in-down">
         <h2>Packs:{{$pack->name}}<span style="color: #0a0c0d">({{$pack->price}} F)</span></h2>
         <div class="panel">
             <div class="panel-body">
@@ -44,7 +44,7 @@
         </div>
         <hr>
         <div id="cart"></div>
-        <table class="table table-bordered table-responsive">
+        <table class="table table-bordered table-responsive" data-aos="zoom-in">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -94,7 +94,7 @@
         </table>
         <span class="hidden" id="itemValue">{{$pack->id}}</span>
     </div>
-    <div class="cartfixed" id="cart1">
+    <div class="cartfixed" id="cart1" data-aos="fade-in">
         <p>Produit</p>
     </div>
     <section class="et_pb_bottom_inside_divider">

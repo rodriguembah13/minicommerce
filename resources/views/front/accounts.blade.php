@@ -32,10 +32,11 @@
                 <div>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" @if(request()->input('tab') == 'profile') class="active" @endif><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+
                         <li role="presentation" @if(request()->input('tab') == 'orders') class="active" @endif><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
                         <li role="presentation" @if(request()->input('tab') == 'address') class="active" @endif><a href="#address" aria-controls="address" role="tab" data-toggle="tab">Addresses</a></li>
                         <li role="presentation" @if(request()->input('tab') == 'pack') class="active" @endif><a href="#pack" aria-controls="pack_incomplet" role="tab" data-toggle="tab">Pack incomplet</a></li>
+                        <li role="presentation" @if(request()->input('tab') == 'profile') class="active" @endif><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -65,13 +66,50 @@
                             </table>
                         </div>
                         <div role="tabpanel" class="tab-pane @if(request()->input('tab') == 'profile')active @endif" id="profile">
-                            {{$customer->name}} <br /><small>{{$customer->email}}</small>
+                            {{--{{$customer->name}} <br /><small>{{$customer->email}}</small>--}}
+
+                            <br>
+                            <section class="content">
+                                <div class="box">
+                                    <form action="{{ route('customer.modify') }}" method="post" class="form">
+                                        <div class="box-body">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="_method" value="put">
+                                            <div class="form-group">
+                                                <label for="name">Name <span class="text-danger">*</span></label>
+                                                <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{!! $customer->name ?: old('name')  !!}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Email <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">@</span>
+                                                    <input type="text" name="email" id="email" placeholder="Email" class="form-control" value="{!! $customer->email ?: old('email')  !!}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password">Password <span class="text-danger">*</span></label>
+                                                <input type="password" name="password" id="password" placeholder="xxxxx" class="form-control">
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-footer">
+                                            <div class="btn-group">
+                                                <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.box -->
+
+                            </section>
+                           {{-- <a href="{{ route('customer.edit', $customer->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>--}}
                         </div>
                         <div role="tabpanel" class="tab-pane @if(request()->input('tab') == 'orders')active @endif" id="orders">
                             @if(!$orders->isEmpty())
                                 <table class="table">
                                 <tbody>
                                 <tr>
+                                    <td>N°</td>
                                     <td>Date</td>
                                     <td>Total</td>
                                     <td>Status</td>
@@ -81,6 +119,7 @@
                                 <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
+                                        <td><p class="text-center" style="">{{ $order['id'] }}</p></td>
                                         <td>
                                             <a data-toggle="modal" data-target="#order_modal_{{$order['id']}}" title="Show order" href="javascript: void(0)">{{ date('M d, Y h:i a', strtotime($order['created_at'])) }}</a>
                                             <!-- Button trigger modal -->

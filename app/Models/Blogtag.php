@@ -12,10 +12,7 @@ protected $fillable = ['tag'];
 
    public function posts()
    {
-
-
-   return $this->belongsToMany(Blogtag::class);
-
+   return $this->belongsToMany(Blogpost::class);
    
    }
 }

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
-                <div class="hero-content" style="text-align: center">
+                <div class="hero-content" style="text-align: center" data-aos="fade-in">
                     <h2 class="hero-title">Blog Posts</h2>
                     <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta veritatis in tenetur doloremque, maiores doloribus officia iste. Dolores.</h3>
                                        

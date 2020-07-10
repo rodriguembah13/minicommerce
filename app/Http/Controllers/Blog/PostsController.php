@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blogcategories;
 use App\Models\Blogpost;
 use App\Models\Blogtag;
+use App\Shop\Employees\Employee;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -73,7 +74,7 @@ class PostsController extends Controller
                 'featured' => 'uploads/posts/'. $featuerd_new,
                 'category_id' => $request->category_id,
                 'slug'=> str_slug($request->title),
-                //'user_id'=>Auth::id()
+                'employee_id'=>Auth::id()
 
 
         ]);
@@ -219,13 +220,15 @@ class PostsController extends Controller
 
         $next_id = Blogpost::where('id', '>', $post->id)->min('id');
         $prev_id = Blogpost::where('id', '<', $post->id)->max('id');
+        //$empl=Employee::where('id',$post->employee_id);
 
 
-        return view('single')->with('post', $post)
+        return view('front.blogs.single')->with('post', $post)
             ->with('title',$post->title)
             ->with('categories',Blogcategories::take(7)->get())
             ->with('next',Blogpost::find($next_id))
             ->with('prev',Blogpost::find($prev_id));
+            //->with('author',$empl);
 
 
 

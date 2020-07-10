@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
-                <div class="hero-content" style="text-align: center;">
+                <div class="hero-content" style="text-align: center;" data-aos="fade-in">
                     <h2 class="hero-title" style="color: #ffffff">CONTACTEZ NOUS</h2>
                 {{--    <h3 style="color: #ffffff">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta veritatis in tenetur doloremque, maiores doloribus officia iste. Dolores.</h3>
                   --}}

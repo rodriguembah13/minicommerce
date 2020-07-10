@@ -3,8 +3,8 @@
 
 @section('content')
 
-     
-     @include('admin.includes.errors')
+    <section class="content">
+        @include('layouts.errors-and-messages')
 
 <div class="panel panel-default">
       <div class="panel-heading">
@@ -78,9 +78,9 @@
 
   </div>
 
-
-
-@stop
+    </section>
+    <!-- /.content -->
+@endsection
 
 
 @section('styles')

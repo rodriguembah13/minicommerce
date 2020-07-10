@@ -19,7 +19,7 @@
 
         <hr>
         <div id="cart"></div>
-        <table class="table table-bordered table-responsive">
+        <table class="table table-bordered table-responsive" data-aos="zoom-in">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -55,7 +55,7 @@
         </table>
 
     </div>
-    <div class="cartfixed" id="cart1">
+    <div class="cartfixed" id="cart1" data-aos="zoom-in-down">
         <p>Produit</p>
     </div>
     <section class="et_pb_bottom_inside_divider">

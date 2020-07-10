@@ -5,7 +5,7 @@
     <section class="content">
         @include('layouts.errors-and-messages')
         <div class="box">
-            <form action="{{ route('admin.employees.store') }}" method="post" class="form">
+            <form action="{{ route('admin.employees.store') }}" method="post" class="form"  enctype="multipart/form-data">
                 <div class="box-body">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -22,6 +22,9 @@
                     <div class="form-group">
                         <label for="password">Password <span class="text-danger">*</span></label>
                         <input type="password" name="password" id="password" placeholder="xxxxx" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" name="avatar" placeholder="Enter Your new password" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="role">Role </label>

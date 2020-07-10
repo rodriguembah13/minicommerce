@@ -346,7 +346,6 @@ jQuery(document).ready(function($) {
 
     }
     counter();
-
-
+    AOS.init();
 
 });

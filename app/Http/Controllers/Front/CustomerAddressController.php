@@ -33,7 +33,7 @@ class CustomerAddressController extends Controller
      * @var ProvinceRepositoryInterface
      */
     private $provinceRepo;
-private $cartRepo;
+    private $cartRepo;
 
     /**
      * @param AddressRepositoryInterface  $addressRepository

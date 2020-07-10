@@ -58,126 +58,152 @@
             height: 10vw;
             z-index: 10;
         }
+        .medium-padding120 {
+            padding: 120px 0; }
+        @media (max-width: 800px) {
+            .medium-padding120 {
+                padding: 35px 0; } }
+        .case-item {
+            padding: 30px;
+            background-color: #f7f9f9;
+            transition: all .3s ease; }
+        @media (max-width: 800px) {
+            .case-item {
+                margin-bottom: 30px; } }
+        .case-item .case-item__thumb {
+            margin-bottom: 34px;
+            box-shadow: 0 16px 16px -8px rgba(0, 0, 0, 0.3); }
+        .case-item .case-item__title {
+            text-transform: uppercase;
+            color: #2f2c2c;
+            margin-bottom: 5px; }
+        .case-item .case-item__cat a {
+            display: inline-block;
+            color: #acacac;
+            font-size: 14px;
+            transition: all .3s ease; }
+        .case-item:hover {
+            background-color: #4cc2c0; }
+        .case-item:hover .case-item__title {
+            color: #fff; }
+        .case-item:hover .case-item__cat a {
+            color: rgba(255, 255, 255, 0.5); }
+        .case-item:hover .case-item__cat a:hover {
+            color: #fff; }
+        .case-item.big {
+            padding-bottom: 60px; }
+        .case-item.big .case-item__thumb {
+            margin-bottom: 60px; }
+        .case-item.big .case-item__cat a {
+            font-size: 16px; }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+            vertical-align: middle; }
+        /*------------- #STUNNING-HEADER --------------*/
+        .stunning-header {
+            padding: 125px 0;
+            background-position: center center; }
+        @media (max-width: 768px) {
+            .stunning-header {
+                padding: 60px 0; } }
+        .stunning-header .stunning-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+            padding: 0 15px; }
+        .stunning-header .stunning-header-content .stunning-header-title {
+            color: #fff; }
+        @media (max-width: 800px) {
+            .stunning-header .stunning-header-content .stunning-header-title {
+                font-size: 40px; } }
+        @media (max-width: 640px) {
+            .stunning-header .stunning-header-content .stunning-header-title {
+                font-size: 36px; } }
+        @media (max-width: 480px) {
+            .stunning-header .stunning-header-content .stunning-header-title {
+                font-size: 30px; } }
+        @media (max-width: 360px) {
+            .stunning-header .stunning-header-content .stunning-header-title {
+                font-size: 24px; } }
+        .stunning-header .stunning-header-content .breadcrumbs {
+            margin-top: 40px;
+            padding: 0; }
+        @media (max-width: 570px) {
+            .stunning-header .stunning-header-content .breadcrumbs {
+                font-size: 12px; } }
+        .stunning-header .stunning-header-content .breadcrumbs .breadcrumbs-item {
+            display: inline-block; }
+        .stunning-header .stunning-header-content .breadcrumbs .breadcrumbs-item a {
+            text-transform: uppercase;
+            color: white;
+            opacity: .5;
+            margin-right: 20px; }
+        .stunning-header .stunning-header-content .breadcrumbs .breadcrumbs-item a:hover {
+            opacity: 1; }
+        .stunning-header .stunning-header-content .breadcrumbs .breadcrumbs-item a.c-gray + i {
+            color: #acacac; }
+        .stunning-header .stunning-header-content .breadcrumbs .breadcrumbs-item.active span {
+            color: white;
+            opacity: 1;
+            text-decoration: underline; }
+        .stunning-header .stunning-header-content .breadcrumbs .breadcrumbs-item.active span.c-primary {
+            color: #4cc2c0; }
+        .stunning-header .stunning-header-content .breadcrumbs .breadcrumbs-item i {
+            margin-right: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px; }
+        .stunning-header .stunning-header-content .breadcrumbs .breadcrumbs-item:last-child i {
+            display: none; }
+        .stunning-header.with-photo {
+            position: relative;
+            padding: 280px 0 120px;
+            background-size: cover; }
+
+        .stunning-header-custom {
+            color: #fff; }
+
+        .stunning-header-custom .stunning-header-title,
+        .stunning-header-custom span,
+        .stunning-header-custom i,
+        .stunning-header-custom a {
+            color: inherit !important; }
     </style>
 @endsection
 
 @section('content')
     @include('front.pages.blog-slider')
-    <section class="et_pb_top_inside_divider">
+    <div class="stunning-header stunning-header-bg-lightviolet">
+        <div class="stunning-header-content">
+            <h1 class="stunning-header-title">Category: {{ $category->name }}</h1>
+        </div>
+    </div>
 
-    </section>
-    <div class="site-section bg-light">
-        <div class="container">
-            <div class="row" data-aos="zoom-in">
+    <div class="container">
+        <div class="row medium-padding120">
+            <main class="main">
 
-                @foreach($posts as $post)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="post-entry-1 h-100">
-                            <a href="{{ route('post.single', ['slug' => $post->slug ]) }}">
-                                <img src="{{ $post->featured }}" alt="Image"
-                                     class="img-fluid">
-                            </a>
-                            <div class="post-entry-1-contents">
+                <div class="row">
+                    <div class="case-item-wrap">
+                        @foreach($category->posts as $post)
 
-                                <h2><a href="{{ route('post.single', ['slug' => $post->slug ]) }}">{{$post->title}}</a>
-                                </h2>
-                                <span class="meta d-inline-block mb-3">{{$post->created_at->toFormattedDateString()}} <span
-                                            class="mx-2">by</span> <a href="#">Admin</a></span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore
-                                    harum molestias consectetur.</p>
+                            <div class="col-lg-4  col-md-4 col-sm-6 col-xs-12">
+                                <div class="case-item">
+                                    <div class="case-item__thumb mouseover poster-3d lightbox shadow animation-disabled" data-offset="5">
+                                        <img src="{{ $post->featured }}" alt="our case">
+                                    </div>
+                                    <a href="{{ route('blog_path', ['slug' => $post->slug ]) }}"><h6 class="case-item__title">{{ $post->title }}</h6></a>
+                                </div>
                             </div>
-                        </div>
+
+                        @endforeach
                     </div>
-                @endforeach
-                {{--    <div class="col-lg-4 col-md-6 mb-4">
-                      <div class="post-entry-1 h-100">
-                        <a href="single.html">
-                          <img src="{{ url('images/img_blog_1.jpg') }}" alt="Image"
-                           class="img-fluid">
-                        </a>
-                        <div class="post-entry-1-contents">
+                </div>
 
-                          <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                          <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                      <div class="post-entry-1 h-100">
-                        <a href="single.html">
-                          <img src="{{ url('images/img_blog_2.jpg') }}" alt="Image"
-                           class="img-fluid">
-                        </a>
-                        <div class="post-entry-1-contents">
-
-                          <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                          <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                      <div class="post-entry-1 h-100">
-                        <a href="single.html">
-                          <img src="{{ url('images/img_blog_3.jpg') }}" alt="Image"
-                           class="img-fluid">
-                        </a>
-                        <div class="post-entry-1-contents">
-
-                          <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                          <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                      <div class="post-entry-1 h-100">
-                        <a href="single.html">
-                          <img src="{{ url('images/img_blog_1.jpg') }}" alt="Image"
-                           class="img-fluid">
-                        </a>
-                        <div class="post-entry-1-contents">
-
-                          <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                          <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                      <div class="post-entry-1 h-100">
-                        <a href="single.html">
-                          <img src="{{ url('images/img_blog_2.jpg') }}" alt="Image"
-                           class="img-fluid">
-                        </a>
-                        <div class="post-entry-1-contents">
-
-                          <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                          <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                      <div class="post-entry-1 h-100">
-                        <a href="single.html">
-                          <img src="{{ url('images/img_blog_3.jpg') }}" alt="Image"
-                           class="img-fluid">
-                        </a>
-                        <div class="post-entry-1-contents">
-
-                          <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                          <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
-                        </div>
-                      </div>
-                    </div>--}}
-
-            </div>
+            </main>
         </div>
     </div>
     <section class="et_pb_bottom_inside_divider">

@@ -3,8 +3,9 @@
 
 @section('content')
 
-     
-     {{--@include('admin.includes.errors')--}}
+    <!-- Main content -->
+    <section class="content">
+        @include('layouts.errors-and-messages')
 
 <div class="panel panel-default">
       <div class="panel-heading">
@@ -63,14 +64,15 @@
 
   </div>
 
-@stop
+     </section>
+     <!-- /.content -->
+@endsection
 
 
 
 @section('styles')
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-
-@stop
+@endsection
 
 
 

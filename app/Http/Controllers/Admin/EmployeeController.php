@@ -71,6 +71,11 @@ class EmployeeController extends Controller
     public function store(CreateEmployeeRequest $request)
     {
         $employee = $this->employeeRepo->createEmployee($request->all());
+        if($request->hasfile('avatar')){
+            $featured = $request->avatar;
+            $featuerd_new = time().$featured->getClientoriginalName();
+            $featured->move('uploads/profiles', $featuerd_new);
+        }
 
         if ($request->has('role')) {
             $employeeRepo = new EmployeeRepository($employee);
@@ -131,8 +136,26 @@ class EmployeeController extends Controller
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
 
         $empRepo = new EmployeeRepository($employee);
-        $empRepo->updateEmployee($request->except('_token', '_method', 'password'));
+        //$featured="";
+       // if($request->hasfile('avatar')){
+            $featured = $request->avatar;
+            $featuerd_new = time().$featured->getClientoriginalName();
+            $featured->move('uploads/profiles', $featuerd_new);
+        //}
 
+       // $empRepo->updateEmployee($request->except('_token', '_method', 'password'));
+
+        $empRepo->updateEmployee([
+
+            'name' => $request->name,
+            'email' => $request->email,
+            'status' =>$request->status,
+            'about' =>$request->about,
+            'facebook' =>$request->facebook,
+            'youtube' =>$request->youtube,
+            'avatar'=> 'uploads/profiles/'. $featuerd_new,
+
+        ]);
         if ($request->has('password') && !empty($request->input('password'))) {
             $employee->password = Hash::make($request->input('password'));
             $employee->save();
@@ -188,7 +211,11 @@ class EmployeeController extends Controller
 
         $update = new EmployeeRepository($employee);
         $update->updateEmployee($request->except('_token', '_method', 'password'));
-
+        if($request->hasfile('avatar')){
+            $featured = $request->avatar;
+            $featuerd_new = time().$featured->getClientoriginalName();
+            $featured->move('uploads/profiles', $featuerd_new);
+        }
         if ($request->has('password') && $request->input('password') != '') {
             $update->updateEmployee($request->only('password'));
         }

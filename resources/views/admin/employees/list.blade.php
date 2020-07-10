@@ -15,6 +15,7 @@
                         <tr>
                             <td class="col-md-1">ID</td>
                             <td class="col-md-3">Name</td>
+                            <td class="col-md-3">Avatar</td>
                             <td class="col-md-3">Email</td>
                             <td class="col-md-1">Status</td>
                             <td class="col-md-4">Actions</td>
@@ -25,6 +26,10 @@
                         <tr>
                             <td>{{ $employee->id }}</td>
                             <td>{{ $employee->name }}</td>
+                            <td>
+                               {{-- <img style="width: 90px;height: 50px;" src="{{$employee->avatar}}" alt="{{$employee->avatar}}">--}}
+                                <img  style="width: 90px;height: 50px;" src="{{ asset(''. $employee->avatar) }}" class="img-rounded" alt="User Image">
+                            </td>
                             <td>{{ $employee->email }}</td>
                             <td>@include('layouts.status', ['status' => $employee->status])</td>
                             <td>

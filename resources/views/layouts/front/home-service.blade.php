@@ -1,6 +1,6 @@
 <div class="site-section bg-light">
     <div class="container">
-        <div class="row justify-content-center  mb-5">
+        <div class="row justify-content-center  mb-5"  data-aos="fade-up">
             <div class="col-md-12 text-center et_pb_text_1">
                 <h2 class="scissors text-center">Services &amp; Pricing</h2>
                 <p class="mb-5 lea">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure nesciunt nemo vel
@@ -13,7 +13,7 @@
             </div>
 
         </div>
-        <div class="row">
+        <div class="row"  data-aos="fade-up">
             <div class="col-12">
 
                 <div class="nonloop-block-13 owl-carousel d-flex">
@@ -24,7 +24,7 @@
         </div>
     </div>
 </div>
-<div class="row justify-content-center  mb-5">
+<div class="row justify-content-center  mb-5" data-aos="fade-up">
     <div class="col-md-12 text-center et_pb_text_1">
         <h2 class="scissors text-center">Notre savoir-faire</h2>
         <p class="mb-5 lea">Fondé sur une expérience forte de 7 ans, notre savoir-faire fait notre réussite mais il
@@ -36,7 +36,7 @@
 </div>
 <div class="container">
 
-    <div class="row">
+    <div class="row" data-aos="fade-up">
         <div class="col-md-4 col-sm-6">
             <div class="serviceBox">
                 <div class="service-icon">
@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row"  data-aos="fade-up">
         <div class="col-md-4 col-sm-6">
             <div class="serviceBox purple">
                 <div class="service-icon">
@@ -113,7 +113,7 @@
         </div>
     </div>
 </div>
-<div class="row justify-content-center  mb-5">
+<div class="row justify-content-center  mb-5"  data-aos="fade-up">
     <div class="col-md-12 text-center et_pb_text_1">
         <h2 class="scissors text-center">Nos engagements</h2>
         <p class="mb-5 lea">Chez Mr Propre, nous prenons le plus grand soin de vos vêtements.<br>
@@ -124,7 +124,7 @@
 
 </div>
 <div class="container">
-    <div class="row">
+    <div class="row"  data-aos="fade-up">
         <div class="col-md-3 col-sm-6 ">
             <div class="service-box">
                 <div class="service-icon yellow">

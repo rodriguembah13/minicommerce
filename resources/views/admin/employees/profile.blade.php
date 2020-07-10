@@ -14,6 +14,7 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">Name</td>
+                                <td class="col-md-4">Avatar</td>
                                 <td class="col-md-4">Email</td>
                                 <td class="col-md-4">Password</td>
                             </tr>
@@ -23,6 +24,11 @@
                             <td>
                                 <div class="form-group">
                                     <input name="name" type="text" class="form-control" value="{{ $employee->name }}">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="file" name="avatar" placeholder="Enter Your new password" class="form-control">
                                 </div>
                             </td>
                             <td>

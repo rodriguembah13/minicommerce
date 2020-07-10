@@ -90,9 +90,31 @@ Route::namespace('Front')->group(function () {
         'as' => 'about_path',
         'uses' => 'HomeController@about'
     ]);
+    Route::get('/map', 'MapController@index');
+    Route::get('/map2', function(){
+        $config = array();
+        $config['center'] = 'Douala, Cameroon';
+        GMaps::initialize($config);
+        $map = GMaps::create_map();
+
+        echo $map['js'];
+        echo $map['html'];
+    });
     Route::get('/blog', [
         'as' => 'blog_path',
-        'uses' => 'HomeController@blog'
+        'uses' => 'BlogController@index'
+    ]);
+    Route::get('/blog/single/{slug}', [
+        'as' => 'blog_single',
+        'uses' => 'BlogController@singlePost'
+    ]);
+    Route::get('/blog/tag/{id}', [
+        'as' => 'blog_tag',
+        'uses' => 'BlogController@tag'
+    ]);
+    Route::get('/blog/category/{id}', [
+        'as' => 'blog_category',
+        'uses' => 'BlogController@category'
     ]);
     Route::get('/contact', [
         'as' => 'contact_path',
@@ -130,6 +152,8 @@ Route::namespace('Front')->group(function () {
         Route::get('checkout/cancel', 'CheckoutController@cancel')->name('checkout.cancel');
         Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
         Route::resource('customer.address', 'CustomerAddressController');
+       // Route::resource('customer', 'CustomerProfilController');
+        Route::put('customer_update','CustomerProfilController@modify')->name('customer.modify');
         Route::get('checkout_table', 'CheckoutTableController@index')->name('checkout_table.index');
         Route::post('checkout_table', 'CheckoutTableController@store')->name('checkout_table.store');
         Route::get('checkout_table/execute', 'CheckoutTableController@executePayPalPayment')->name('checkout_table.execute');
@@ -147,9 +171,14 @@ Route::namespace('Front')->group(function () {
     Route::post('ajaxRequestDeleteTable', 'TableProductController@ajaxRequestDeleteCart')->name('front.deletetable');
 
 });
+/*Route::any('{query}', function () {
+    return view('comingsoon::comingsoon');
+})->where('query', '.*');
+Route::get('/', function () {
+    return view('comingsoon::comingsoon');
+});*/
 Route::namespace('Blog')->group(function () {
     Route::get('/post/create', [
-
 
         'uses' => 'PostsController@create',
         'as' => 'post.create'

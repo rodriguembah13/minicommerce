@@ -5,7 +5,9 @@
 @section('content')
 
 
-
+	<!-- Main content -->
+	<section class="content">
+		@include('layouts.errors-and-messages')
 
 	 <div class="panel panel-default">
 	 	<div class="panel-body">
@@ -55,6 +57,7 @@
 			</table>
 	 	</div>
 	 </div>
-	
 
-@stop
+	</section>
+	<!-- /.content -->
+@endsection
