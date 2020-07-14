@@ -8,7 +8,7 @@
                     <a class="btn btn-success" href="https://github.com/jsdecena/laracom" target="_blank" role="button">DOWNLOAD <i class="fa fa-cloud-download"></i></a>
                     --}}
                     <br>
-                    <a data-aos="fade-up" class="btn btn-danger btn-lg" style="text-align: center;" href="#" target="_blank" role="button">Planifier un ramassage  <i class="fa fa-paper-plane"></i></a>
+                    <a data-aos="fade-up" class="btn btn-primary btn-lg" style="text-align: center;" href="{{ route('tarif_path') }}" target="_blank" role="button">Planifier un ramassage  <i class="fa fa-paper-plane"></i></a>
                 </div>
             </div>
             <div class="col-md-4"></div>

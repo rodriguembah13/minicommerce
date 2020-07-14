@@ -37,15 +37,15 @@
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
 }
-.scissors::after {
-    bottom: 0;
-    left: 0;
-    font-size: 22px;
-    content: "\f0c4";
-    font-family: 'icomoon';
-    position: absolute;
-    color: #ccc;
-}
+        .scissors::after {
+            bottom: 0;
+            left: 0;
+            font-size: 22px;
+            content: "\f0c4";
+            font-family: 'FontAwesome';
+            position: absolute;
+            color: #ccc;
+        }
 .serviceBox {
             background: #fff;
             font-family: 'Montserrat', sans-serif;

@@ -482,7 +482,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea, select {
-    border: 1px solid #d89522;
+    border: 1px solid #b3b3b3;
     background: #fff;
     border-radius: 3px !important;
     color: #c4c4c4;
@@ -502,14 +502,14 @@ textarea, select {
     font-size: 15px;
     height: 40px;
     width: 125px;
-    background: #d89522;
+    background: #b3b3b3;
     color: #fff;
     margin-left: 10px;
     transition: .3s
 }
 .btn-subscribe:hover {
     background: #fff;
-    border: 1px solid #d89522;
+    border: 1px solid #b3b3b3;
     color: #222;
 }
 
@@ -625,7 +625,7 @@ footer{
 }
 
 .footer-distributed h3 span{
-    color:  #e0ac1c;
+    color:  #b3b3b3;
 }
 
 /* Footer links */

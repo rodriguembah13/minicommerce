@@ -16,4 +16,5 @@
     <section class="et_pb_bottom_inside_divider">
 
     </section>
+    <a id="button_top"></a>
 @endsection

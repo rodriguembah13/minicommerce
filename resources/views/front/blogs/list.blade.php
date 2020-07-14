@@ -367,12 +367,12 @@
 		.post-standard .overlay {
 			opacity: 0; }
 		.post-standard.sticky:before {
-			content: '\e952';
-			font-family: "seosight";
+			content: '\f00';
+			font-family: "FontAwesome";
 			display: block;
 			width: 50px;
 			height: 50px;
-			background-color: #f04e4e;
+			background-color: #b3b3b3;
 			line-height: 50px;
 			text-align: center;
 			color: #fff;
