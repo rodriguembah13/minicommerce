@@ -32,7 +32,7 @@ html {
     min-height: 100%;
 }
 body {
-    font-family: 'Muli', sans-serif;
+    font-family: 'Times New Roman',Georgia,"Times New Roman",serif;';
     font-size: 15px;
     line-height: 27px;
     font-color: black;
@@ -40,11 +40,11 @@ body {
 }
 ::-moz-selection {
     background: #222;
-    color: #d89522;
+    color: #0170bf;
 }
 ::selection {
     background: #222;
-    color: #d89522;
+    color: #0170bf;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Droid Serif', serif;
@@ -54,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 15px;
 }
 p {
-    font-size: 15px;
+    font-size: 20px;
     color: #52575d;
     line-height: 25px;
     font-weight: 400;
@@ -62,13 +62,13 @@ p {
     margin-top: 0px;
 }
 a {
-    color: #d89522;
+    color: #0170bf;
     cursor: pointer;
     text-decoration: none;
     transition: .3s;
 }
 a:hover {
-    color: #d89522;
+    color: #0170bf;
     text-decoration: none;
 }
 
@@ -77,8 +77,9 @@ a:hover {
 }
 
 li.active a {
-    color: #d89522;
-    background: #0170bf;
+    color: #0170bf !important;
+    font-weight: bold !important;
+    /*background: #0170bf;*/
 }
 ul.sidebar-menu li a {
     display: block;
@@ -90,7 +91,7 @@ ul.sidebar-category-sub li {
 }
 
 ul.navbar-nav > li.active > a {
-    color: #d89522 !important;
+    color: #0170bf !important;
 }
 
 .t100 {
@@ -102,7 +103,7 @@ ul.navbar-nav > li.active > a {
 .btn-default:hover {
     color: #222;
     background-color: #fff;
-    border-color: #d89522;
+    border-color: #0170bf;
     transition: .3s
 }
 
@@ -149,7 +150,7 @@ ul.navbar-nav li a{
 }
 
 ul.navbar-nav li a:hover {
-    color: #d89522 !important
+    color: #0170bf !important
 }
 
 
@@ -168,7 +169,7 @@ li.menubar-cart a {
 }
 .cart-number {
     color: #fff;
-    background: #d89522;
+    background: #0170bf;
     font-size: 10px;
     font-weight: bold;
     text-align: center;
@@ -216,7 +217,7 @@ li.menubar-cart a {
 }
 .btn-hero {
     font-family: 'Lora', serif;
-    background: #d89522;
+    background: #0170bf;
     color: #fff;
     font-size: 20px;
     padding: 10px;
@@ -225,13 +226,13 @@ li.menubar-cart a {
     width: 185px;
     height: 50px;
     transition: .3s;
-    border: 1px solid #d89522;
+    border: 1px solid #0170bf;
 
 }
 .btn-hero:hover {
     color: #222;
     background-color: #fff;
-    border: 1px solid #d89522;
+    border: 1px solid #0170bf;
 }
 .hero-content {
     position: relative;
@@ -295,7 +296,7 @@ li.menubar-cart a {
 .product-btn {
     border-radius: 3px;
     font-size: 14px;
-    background: #d89522;
+    background: #0170bf;
     color: #fff;
     border: 0px;
     margin-top: 10px;
@@ -314,7 +315,7 @@ li.menubar-cart a {
     margin: 0;
 }
 .product-text p span{
-    color: #d89522;
+    color: #0170bf;
     font-weight: bold;
     margin: 5px 0 0;
 }
@@ -329,7 +330,7 @@ li.menubar-cart a {
     font-size: 14px;
     text-transform: uppercase;
     color: #919191;
-    border-color: #d89522;
+    border-color: #0170bf;
     border-radius: 3px;
     font-family: 'Lora', serif;
 }
@@ -425,7 +426,7 @@ li.menubar-cart a {
 }
 .read-more .glyphicon {
     font-size: 10px;
-    color: #d89522
+    color: #0170bf
 }
 
 .media{
@@ -528,7 +529,7 @@ textarea, select {
     color: #000000;
 }
 .header-menu a:hover, .footer-social a:hover {
-    color: #d89522
+    color: #0170bf
 }
 
 
@@ -763,7 +764,7 @@ footer{
 }
 
 a:hover img {
-    border: 1px solid #d89522;
+    border: 1px solid #0170bf;
 }
 
 .customer-order-list .tab-pane {
@@ -778,9 +779,9 @@ a:hover img {
     top:11px;
 }
 .form-inline #search-btn {
-    border-top: 1px solid #d89522;
-    border-right: 1px solid #d89522;
-    border-bottom: 1px solid #d89522;
+    border-top: 1px solid #0170bf;
+    border-right: 1px solid #0170bf;
+    border-bottom: 1px solid #0170bf;
     border-left: 1px solid #d8cab2;
 }
 
@@ -844,7 +845,7 @@ a:hover img {
 }
 
 #thumbnails li a:hover img {
-    border: 1px solid #d89522;
+    border: 1px solid #0170bf;
 }
 #productAttribute {
     width: 312px;
@@ -937,7 +938,7 @@ a:hover img {
 {
     display: block;
     color: #1e1e27;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
     text-transform: uppercase;
     padding: 20px;
@@ -949,7 +950,7 @@ a:hover img {
 }
 .navbar_menu li a:hover
 {
-    color: #b5aec4;
+    color: #0170bf;
 }
 .navbar_user
 {
